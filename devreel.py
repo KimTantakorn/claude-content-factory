@@ -15,7 +15,7 @@ Modes:
   recap      Generate a written recap (Markdown) of the work from git history.
   reel       Convert any 16:9 video into a 9:16 Instagram/TikTok reel with a title card.
 
-Designed for the "Watch Claude Build 100 Projects" content series.
+Designed for the VibeBuild "100 Projects, No AI" content series.
 Requires: ffmpeg on PATH (or set DEVREEL_FFMPEG), Pillow (pip install Pillow), git.
 """
 from __future__ import annotations

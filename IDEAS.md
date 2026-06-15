@@ -1,156 +1,158 @@
 <!-- © 2026 VibeBuild (K.T.). Noncommercial use only; commercial use requires a license (see COMMERCIAL.md). -->
 
-# 💯 100 Claude Projects — a VibeBuild Series
+# 💯 100 Projects — No AI, Pure Code — a VibeBuild Series
 
-A curated list of 100 buildable project ideas, designed for a YouTube + Instagram Reels + GitHub content series.
-Each idea has a **pitch**, a **wow factor** (what makes it clip-worthy), a **difficulty** (⏱️ build time), and a **stack**.
+100 buildable projects that use **zero AI / no LLMs / no ML** — just real code: physics, graphics, algorithms, data.
+No API keys, no costs, works offline. Great for content *and* for actually learning to build.
 
 > Legend — Difficulty: 🟢 Easy (1 video) · 🟡 Medium (1–2 videos) · 🔴 Hard (multi-part)
 > Wow: ⭐ to ⭐⭐⭐⭐⭐ (how much it makes a viewer stop scrolling)
 
 ---
 
-## 🤖 Category 1 — AI Agents & Automation
+## 🎮 Category 1 — Games
 
-1. **Disagreement Engine** — Two AIs with opposing worldviews debate *your* decision and try to convince each other. ⭐⭐⭐⭐⭐ 🟡 — Node + Claude API.
-2. **Inbox Zero Agent** — Reads your email, drafts replies in your voice, flags only what needs you. ⭐⭐⭐⭐ 🟡 — Python + Gmail API + Claude.
-3. **Meeting Ghostwriter** — Joins calls, transcribes, and ships action-items to Notion/Slack automatically. ⭐⭐⭐⭐ 🔴 — Whisper + Claude.
-4. **Code Reviewer Bot** — Auto-reviews every PR with senior-engineer-level comments. ⭐⭐⭐⭐ 🟡 — GitHub Actions + Claude.
-5. **Job Application Autopilot** — Tailors your resume + cover letter per posting, tracks applications. ⭐⭐⭐⭐ 🟡 — Python + Claude.
-6. **Research Swarm** — 5 agents split a research question, debate findings, return one report. ⭐⭐⭐⭐⭐ 🔴 — Multi-agent SDK.
-7. **Price Watchdog** — Watches products/flights, predicts price drops, buys at the dip. ⭐⭐⭐ 🟡 — Python + scrapers.
-8. **Customer Support Twin** — Trains on your docs and answers users in your brand voice. ⭐⭐⭐ 🟡 — RAG + Claude.
-9. **Daily Standup Bot** — Reads your git commits and writes your standup update for you. ⭐⭐⭐ 🟢 — git log + Claude.
-10. **Self-Healing Scripts** — When a script crashes, an agent reads the traceback and patches it live. ⭐⭐⭐⭐⭐ 🔴 — Python + Claude.
+1. **Falling Sand Game** — Pixel sim where sand, water, fire, and plants interact. Mesmerizing to watch. ⭐⭐⭐⭐⭐ 🟡 — JS canvas.
+2. **Physics Golf** — Fling a ball through hand-drawn courses with real gravity + bounce. ⭐⭐⭐⭐ 🟡 — Matter.js.
+3. **Chess Engine from Scratch** — Minimax + alpha-beta, no ML. It actually beats you. ⭐⭐⭐⭐ 🔴 — Python/JS.
+4. **Multiplayer Snake (.io)** — Real-time snake battle royale over websockets. ⭐⭐⭐⭐ 🟡 — Node + WS.
+5. **Terminal Roguelike** — Procedural dungeons, permadeath, ASCII graphics. ⭐⭐⭐⭐ 🔴 — Python.
+6. **Wave Function Collapse Levels** — Generate infinite coherent maps from tiny tile rules. ⭐⭐⭐⭐⭐ 🔴 — JS.
+7. **2048 + Chaos Mods** — Classic 2048 with gravity flips, bombs, and timers. ⭐⭐⭐ 🟢 — JS.
+8. **Rhythm Game Auto-Charter** — Drop any MP3, it charts the beats via FFT (signal, not AI). ⭐⭐⭐⭐⭐ 🔴 — Web Audio.
+9. **Tower Defense Builder** — Design your own maps and waves. ⭐⭐⭐ 🟡 — JS canvas.
+10. **Webcam Pong** — Your body movement is the paddle (optical flow, classic CV). ⭐⭐⭐⭐ 🟡 — OpenCV.
 
-## 🛠️ Category 2 — Developer Tools
+## 🌀 Category 2 — Generative Art (algorithmic)
 
-11. **DevReel** (this repo!) — Turns your coding session into a timelapse + auto-narrated recap video. ⭐⭐⭐⭐⭐ 🟡 — Python + ffmpeg.
-12. **Commit Poet** — Generates perfect commit messages from your staged diff. ⭐⭐⭐ 🟢 — git + Claude.
-13. **Regex Whisperer** — Describe in English, get the regex + test cases + explanation. ⭐⭐⭐ 🟢 — Web app.
-14. **Codebase Cartographer** — Generates an interactive map/diagram of any repo. ⭐⭐⭐⭐ 🟡 — AST parser + D3.
-15. **Bug Time Machine** — `git bisect` powered by AI to find the commit that broke things. ⭐⭐⭐⭐ 🟡 — Python.
-16. **Doc-from-Code** — Auto-writes and keeps README/docs in sync with the code. ⭐⭐⭐ 🟡 — Claude + git hooks.
-17. **Test Generator** — Reads a function, writes a full passing test suite. ⭐⭐⭐⭐ 🟡 — Claude API.
-18. **API Mock Studio** — Describe an API in English, get a live mock server with fake data. ⭐⭐⭐ 🟡 — Node.
-19. **Dependency Doctor** — Explains *why* an npm/pip dependency exists and if it's safe to remove. ⭐⭐⭐ 🟡 — Python.
-20. **Terminal Copilot** — Natural-language → shell command with safety checks. ⭐⭐⭐⭐ 🟢 — CLI.
+11. **Fractal Explorer** — Infinite-zoom Mandelbrot/Julia on the GPU. ⭐⭐⭐⭐⭐ 🟡 — WebGL shader.
+12. **Flow Fields** — Thousands of particles flowing through Perlin noise. ⭐⭐⭐⭐⭐ 🟢 — p5.js.
+13. **Reaction-Diffusion** — Generate Turing patterns (animal spots/stripes) live. ⭐⭐⭐⭐⭐ 🟡 — shader.
+14. **Boids Flocking** — Emergent bird/fish swarms from 3 simple rules. ⭐⭐⭐⭐ 🟢 — JS canvas.
+15. **L-System Plants** — Grow fractal trees and ferns from grammar rules. ⭐⭐⭐⭐ 🟢 — p5.js.
+16. **Harmonograph** — Simulate a pendulum drawing machine; hypnotic curves. ⭐⭐⭐⭐ 🟢 — canvas.
+17. **Voronoi Mosaic** — Turn any photo into stained-glass Voronoi art. ⭐⭐⭐ 🟢 — JS.
+18. **Audio Visualizer** — Real-time FFT bars/waveforms reacting to music. ⭐⭐⭐⭐ 🟡 — Web Audio.
+19. **Maze Generator + Solver** — Watch it carve a maze, then flood-fill solve it. ⭐⭐⭐ 🟢 — canvas.
+20. **Photo → Pixel/ASCII Mosaic** — Rebuild images from tiny tiles or characters. ⭐⭐⭐ 🟢 — Python/JS.
 
-## 🎨 Category 3 — Creative & Generative Art
+## 🛠️ Category 3 — Developer Tools & CLI
 
-21. **Counterfactual Camera** — Photograph anything, see it in a parallel timeline (AR). ⭐⭐⭐⭐⭐ 🔴 — Mobile + diffusion.
-22. **Mood-to-Music** — Describe a feeling, get an original generated track. ⭐⭐⭐⭐ 🟡 — Audio gen API.
-23. **Logo Forge** — Brand brief in, 50 logo concepts + brand kit out. ⭐⭐⭐ 🟡 — Image gen.
-24. **Comic Studio** — Type a story, get a full multi-panel comic with consistent characters. ⭐⭐⭐⭐⭐ 🔴 — Image gen + Claude.
-25. **Generative Wallpaper Engine** — Daily fresh desktop art tuned to your taste. ⭐⭐⭐ 🟢 — Python + image gen.
-26. **Style Transfer Playground** — Turn your photos into any artist's style live. ⭐⭐⭐ 🟡 — ML model.
-27. **ASCII Art Machine** — Webcam → live ASCII art in the terminal. ⭐⭐⭐ 🟢 — Python + OpenCV.
-28. **Poetry Slam Bot** — Generates and "performs" slam poetry with TTS + beat. ⭐⭐⭐ 🟢 — Claude + TTS.
-29. **AI Tattoo Designer** — Describe meaning, get custom tattoo concepts in chosen styles. ⭐⭐⭐ 🟡 — Image gen.
-30. **Dream Visualizer** — Type your dream, wake up to a video of it. ⭐⭐⭐⭐⭐ 🔴 — Video gen.
+21. **Git Commit Graph Visualizer** — Beautiful interactive timeline of any repo. ⭐⭐⭐⭐ 🟡 — D3.
+22. **Sorting Algorithm Visualizer (with sound)** — Bars + tones for each swap. Classic banger. ⭐⭐⭐⭐⭐ 🟢 — canvas.
+23. **System Monitor TUI** — htop-style live CPU/RAM/net dashboard. ⭐⭐⭐⭐ 🟡 — Python/Rust.
+24. **Regex Tester/Visualizer** — Live match highlighting + railroad diagram (rule-based). ⭐⭐⭐⭐ 🟡 — JS.
+25. **Markdown → Slide Deck** — Turn a `.md` file into a reveal.js presentation. ⭐⭐⭐ 🟢 — Node.
+26. **HTTP Client TUI** — A terminal Postman: build, send, inspect requests. ⭐⭐⭐ 🟡 — Python.
+27. **Color Palette Extractor** — Pull the dominant palette from any image (k-means, classic). ⭐⭐⭐ 🟢 — Python.
+28. **Cron Expression Builder** — Visual editor that explains and previews schedules. ⭐⭐⭐ 🟢 — JS.
+29. **Binary/Hex File Inspector** — Pretty hex + ASCII viewer for any file. ⭐⭐⭐ 🟡 — Rust/Go.
+30. **JSON Diff & Merge** — Side-by-side visual diff with conflict resolution. ⭐⭐⭐ 🟡 — JS.
 
-## 🎮 Category 4 — Games
+## 🌐 Category 4 — Web Apps & Tools
 
-31. **AI Dungeon Master** — Voice-driven infinite tabletop RPG with live worlds + art. ⭐⭐⭐⭐⭐ 🔴 — Claude + image gen.
-32. **Smartest NPC Ever** — One game NPC that truly remembers and reacts to you. ⭐⭐⭐⭐ 🟡 — Unity + Claude.
-33. **Trivia That Knows You** — Quiz that adapts difficulty to your exact knowledge gaps. ⭐⭐⭐ 🟢 — Web app.
-34. **Text Adventure Forge** — Describe a world, play it instantly as a parser game. ⭐⭐⭐⭐ 🟡 — Claude.
-35. **AI Chess Coach** — Plays you AND explains every move like a grandmaster. ⭐⭐⭐⭐ 🟡 — Stockfish + Claude.
-36. **Werewolf/Mafia with AI Players** — Play social-deduction against scheming AIs. ⭐⭐⭐⭐⭐ 🔴 — Multi-agent.
-37. **Procedural Quest Generator** — Endless fresh quests for any RPG. ⭐⭐⭐ 🟡 — Claude.
-38. **Guess-the-Prompt** — Multiplayer game: see AI art, guess the prompt. ⭐⭐⭐⭐ 🟡 — Web + image gen.
-39. **Escape Room Generator** — Generates a printable/online escape room on any theme. ⭐⭐⭐ 🟡 — Claude.
-40. **Emoji Battle** — Two AIs duel using only emoji; you judge. ⭐⭐⭐ 🟢 — Claude.
+31. **Pixel Art Editor** — Draw sprites, animate frames, export sprite sheets. ⭐⭐⭐⭐ 🟡 — canvas.
+32. **Collaborative Whiteboard** — Real-time multi-cursor drawing over websockets. ⭐⭐⭐⭐ 🔴 — Node + WS.
+33. **Kanban Board** — Drag-and-drop tasks, local-first, no backend needed. ⭐⭐⭐ 🟡 — React.
+34. **Typing Speed Test** — WPM + a heatmap of which keys slow you down. ⭐⭐⭐⭐ 🟢 — JS.
+35. **Habit Tracker Heatmap** — GitHub-style contribution grid for any habit. ⭐⭐⭐ 🟢 — JS.
+36. **URL Shortener + Analytics** — Custom links with click charts. ⭐⭐⭐ 🟡 — Node + SQLite.
+37. **Expense Splitter** — Splitwise-lite: who owes whom, settled up. ⭐⭐⭐ 🟡 — React.
+38. **Drum Machine / Step Sequencer** — Make beats in the browser, export WAV. ⭐⭐⭐⭐ 🟡 — Web Audio.
+39. **Markdown Note App** — Local-first notes with instant search + tags. ⭐⭐⭐ 🟡 — React.
+40. **Pomodoro + Soundscape Mixer** — Focus timer with mixable rain/cafe/waves. ⭐⭐⭐ 🟢 — JS.
 
 ## ⚡ Category 5 — Productivity & Life
 
-41. **Time Capsule AI** — An AI that refuses to reply until a future date, as your future self. ⭐⭐⭐⭐⭐ 🟡 — Web app + scheduler.
-42. **Decision Journal** — Logs your decisions, then grades them months later with hindsight. ⭐⭐⭐⭐ 🟡 — Web app.
-43. **Habit Coach That Texts You** — Adaptive nudges over SMS based on your patterns. ⭐⭐⭐ 🟡 — Twilio + Claude.
-44. **Receipt-to-Budget** — Snap receipts, get a live budget + spending insights. ⭐⭐⭐ 🟡 — OCR + Claude.
-45. **Life Dashboard** — One screen: calendar, health, money, goals — narrated by AI each morning. ⭐⭐⭐⭐ 🔴 — Full-stack.
-46. **Meal Plan from Fridge Photo** — Photograph your fridge, get recipes + a grocery list. ⭐⭐⭐⭐ 🟡 — Vision + Claude.
-47. **Email Tone Translator** — Rewrite angry emails into effective ones (or X-ray the sender's true feeling). ⭐⭐⭐⭐ 🟢 — Web app.
-48. **Subscription Killer** — Finds and cancels subscriptions you forgot about. ⭐⭐⭐ 🟡 — Bank API + Claude.
-49. **Voice Journal** — Talk to it daily; it builds your life timeline + spots patterns. ⭐⭐⭐⭐ 🟡 — Whisper + Claude.
-50. **Negotiation Rehearsal** — Practice a hard conversation against an AI playing the other side. ⭐⭐⭐⭐ 🟡 — Voice + Claude.
+41. **Life in Weeks** — Your whole life as a 90×52 grid of dots. Surprisingly emotional. ⭐⭐⭐⭐⭐ 🟢 — JS.
+42. **Finance Dashboard from CSV** — Drop a bank export, get spending charts + trends. ⭐⭐⭐⭐ 🟡 — Python + Plotly.
+43. **Workout Logger** — Log lifts, auto-plot progressive overload curves. ⭐⭐⭐ 🟡 — React.
+44. **Meal Planner + Grocery List** — Pick recipes, auto-merge the shopping list. ⭐⭐⭐ 🟡 — JS.
+45. **Timezone Meeting Planner** — Find the overlap across any cities. ⭐⭐⭐ 🟢 — JS.
+46. **Subscription Reminder** — Track renewals, warn before you get charged. ⭐⭐⭐ 🟢 — Node.
+47. **Reading Tracker** — Books, progress bars, yearly stats. ⭐⭐ 🟢 — React.
+48. **Mood Journal** — Daily entry → a year-long mood color calendar. ⭐⭐⭐ 🟢 — JS.
+49. **Password Generator + Strength Meter** — Entropy-based, fully offline. ⭐⭐ 🟢 — JS.
+50. **Countdown Wall** — Live countdowns to every event you care about. ⭐⭐ 🟢 — JS.
 
 ## 📊 Category 6 — Data & Visualization
 
-51. **Idea Genome** — Trace any idea's intellectual DNA and find its unborn offspring. ⭐⭐⭐⭐⭐ 🔴 — Graph + Claude.
-52. **CSV Whisperer** — Drop any spreadsheet, ask questions in English, get charts. ⭐⭐⭐⭐ 🟡 — Pandas + Claude.
-53. **Your Year in Data** — Connect your apps, get a beautiful "Spotify Wrapped" for your whole life. ⭐⭐⭐⭐ 🔴 — Full-stack.
-54. **Wikipedia Rabbit-Hole Mapper** — Visualizes how topics connect as you explore. ⭐⭐⭐ 🟡 — D3.
-55. **Sentiment Weather Map** — Live emotional map of social media by region. ⭐⭐⭐ 🟡 — Streaming + Claude.
-56. **Stock Story Generator** — Explains *why* a stock moved today in plain English. ⭐⭐⭐ 🟡 — APIs + Claude.
-57. **Personal Knowledge Graph** — Auto-links your notes into a navigable brain. ⭐⭐⭐⭐ 🔴 — Graph DB.
-58. **Code Complexity Heatmap** — Visualize where the scary parts of a codebase live. ⭐⭐⭐ 🟡 — AST + viz.
-59. **Argument Mapper** — Paste a debate, get a visual map of claims and evidence. ⭐⭐⭐⭐ 🟡 — Claude + D3.
-60. **City Vibe Checker** — Mash up data to score any neighborhood's "vibe" for you. ⭐⭐⭐ 🟡 — APIs + Claude.
+51. **GitHub Profile Analyzer** — Charts your languages, streaks, busiest hours. ⭐⭐⭐⭐ 🟡 — API + D3.
+52. **Spotify Wrapped (DIY)** — Use your data export to build your own year-in-music. ⭐⭐⭐⭐ 🟡 — Python.
+53. **Travel Map** — Pin everywhere you've been on an interactive globe. ⭐⭐⭐⭐ 🟡 — Mapbox/Leaflet.
+54. **Wikipedia Link Graph** — Crawl from any article, visualize the web of links. ⭐⭐⭐⭐ 🔴 — D3.
+55. **Live Flight Tracker** — Plot real planes from public ADS-B data. ⭐⭐⭐⭐ 🟡 — Leaflet.
+56. **Weather Dashboard** — Clean multi-city forecast from a public API. ⭐⭐⭐ 🟢 — JS.
+57. **Stock/Crypto Ticker** — Real-time price board with sparkline charts. ⭐⭐⭐ 🟡 — WS.
+58. **Earthquake Map** — Live USGS quakes as pulsing dots on a globe. ⭐⭐⭐⭐ 🟡 — Leaflet.
+59. **CSV → Instant Charts** — Drop any CSV, auto-detect columns, render dashboards. ⭐⭐⭐⭐ 🟡 — Python.
+60. **ISS Live Tracker** — Where's the space station right now, in 3D. ⭐⭐⭐⭐ 🟡 — Three.js.
 
-## 🌐 Category 7 — Web Apps & SaaS
+## 🪐 Category 7 — Simulations & Physics
 
-61. **Living Resume** — An AI clone of you that answers recruiters 24/7 on your site. ⭐⭐⭐⭐ 🟡 — RAG + Claude.
-62. **Landing Page in 60s** — Describe a product, get a deployed landing page instantly. ⭐⭐⭐⭐⭐ 🟡 — Next.js + Claude.
-63. **AI Form Builder** — Describe what you need to collect, get a working form + backend. ⭐⭐⭐ 🟡 — Full-stack.
-64. **Changelog Generator** — Turns merged PRs into a polished public changelog. ⭐⭐⭐ 🟢 — GitHub API + Claude.
-65. **Cold Email Studio** — Research a prospect and draft a personalized email that converts. ⭐⭐⭐⭐ 🟡 — Claude.
-66. **Micro-Course Builder** — Topic in, full multi-lesson course with quizzes out. ⭐⭐⭐⭐ 🟡 — Claude.
-67. **Legal Plain-English** — Paste any contract/ToS, get the real risks highlighted. ⭐⭐⭐⭐ 🟡 — Claude.
-68. **Recipe Scaler & Swapper** — Adjust servings, swap for allergies/diet automatically. ⭐⭐⭐ 🟢 — Web app.
-69. **A/B Copy Tester** — Generates and ranks marketing copy variations. ⭐⭐⭐ 🟢 — Claude.
-70. **Feedback Synthesizer** — Dumps of user feedback → ranked product roadmap. ⭐⭐⭐⭐ 🟡 — Claude.
+61. **Solar System Simulator** — N-body gravity, real orbital mechanics. ⭐⭐⭐⭐⭐ 🔴 — Three.js.
+62. **Conway's Game of Life** — Cellular automata + pattern library (gliders, guns). ⭐⭐⭐⭐ 🟢 — canvas.
+63. **Double Pendulum Chaos** — Tiny start differences, wildly different paths. ⭐⭐⭐⭐⭐ 🟢 — canvas.
+64. **Cloth / Rope Simulation** — Verlet integration; drag and tear fabric. ⭐⭐⭐⭐⭐ 🟡 — canvas.
+65. **Fluid Simulation** — Real-time smoke/water you can swirl with the mouse. ⭐⭐⭐⭐⭐ 🔴 — shader.
+66. **Traffic Flow Sim** — Watch jams emerge from simple driver rules. ⭐⭐⭐⭐ 🟡 — JS.
+67. **Predator–Prey Ecosystem** — Foxes and rabbits boom and bust over time. ⭐⭐⭐⭐ 🟡 — JS.
+68. **Ant Colony Pathfinding** — Pheromone trails find the shortest route. ⭐⭐⭐⭐ 🟡 — canvas.
+69. **Soft-Body Physics** — Squishy jelly blobs with spring meshes. ⭐⭐⭐⭐ 🔴 — JS.
+70. **Galaxy Collision** — Smash two particle galaxies and watch the dance. ⭐⭐⭐⭐⭐ 🔴 — WebGL.
 
-## 💬 Category 8 — Social & Communication
+## 🔌 Category 8 — Hardware / Physical (Arduino & Pi)
 
-71. **Empathy Translator** — X-rays the emotion under any message: fear, need, intent. ⭐⭐⭐⭐⭐ 🟡 — Web app.
-72. **Group Chat Summarizer** — Catch up on 500 unread messages in 3 bullets. ⭐⭐⭐⭐ 🟢 — Claude.
-73. **Debate Practice Partner** — Argues any side to sharpen your thinking. ⭐⭐⭐⭐ 🟢 — Claude.
-74. **Apology Coach** — Helps you write a sincere, non-defensive apology. ⭐⭐⭐ 🟢 — Claude.
-75. **Language Exchange Buddy** — Chats with you in a new language at your level, corrects gently. ⭐⭐⭐⭐ 🟡 — Voice + Claude.
-76. **Roast & Toast Bot** — Generates wedding/birthday speeches (kind or savage). ⭐⭐⭐ 🟢 — Claude.
-77. **Reply Guy** — Suggests great replies for dating apps / DMs (you pick). ⭐⭐⭐ 🟢 — Claude.
-78. **Conflict Mediator** — Both people state their side; AI finds the real disagreement. ⭐⭐⭐⭐⭐ 🟡 — Claude.
-79. **Tone-Match Writer** — Learns your texting style and drafts in your exact voice. ⭐⭐⭐⭐ 🟡 — Claude.
-80. **Anonymous Confession Analyzer** — Find themes across many anonymous submissions. ⭐⭐⭐ 🟡 — Claude.
+71. **LED Matrix Clock** — Scrolling animations + weather on an LED grid. ⭐⭐⭐⭐ 🟡 — Arduino.
+72. **Smart Mirror** — Two-way mirror showing time, weather, calendar. ⭐⭐⭐⭐⭐ 🔴 — Raspberry Pi.
+73. **Macro Keypad** — Custom hotkey pad with firmware you flash yourself. ⭐⭐⭐⭐ 🟡 — QMK.
+74. **Motion-Detect Security Cam** — Pi cam that records + alerts on movement (classic CV). ⭐⭐⭐⭐ 🟡 — Pi.
+75. **Weather Station** — Log temp/humidity/pressure to a live dashboard. ⭐⭐⭐ 🟡 — Arduino.
+76. **Photo Booth** — Button → countdown → 4-up photo strip print. ⭐⭐⭐ 🟡 — Pi.
+77. **Plant Moisture Monitor** — Sensor + dashboard that nags you to water. ⭐⭐⭐ 🟢 — ESP32.
+78. **Reaction-Time Game** — Physical buttons + LEDs, "whack the light." ⭐⭐⭐ 🟢 — Arduino.
+79. **Step Counter** — Pedometer from a phone/accelerometer (peak detection). ⭐⭐⭐ 🟡 — mobile.
+80. **POV LED Spinner** — Spinning LEDs that paint text/images in the air. ⭐⭐⭐⭐⭐ 🔴 — Arduino.
 
-## 📚 Category 9 — Learning & Education
+## 🧩 Category 9 — Browser Extensions & Automation
 
-81. **Explain Like I'm Any Age** — Same concept, sliding from age 5 to PhD. ⭐⭐⭐⭐ 🟢 — Web app.
-82. **Socratic Tutor** — Never gives answers, only the next perfect question. ⭐⭐⭐⭐⭐ 🟡 — Claude.
-83. **Flashcards from Anything** — PDF/video/lecture → spaced-repetition deck. ⭐⭐⭐⭐ 🟡 — Claude + Anki.
-84. **History Time Traveler** — Interview any historical figure (voiced). ⭐⭐⭐⭐ 🟡 — Voice + Claude.
-85. **Math Step Visualizer** — Solves and *animates* each step of a problem. ⭐⭐⭐⭐ 🔴 — Manim + Claude.
-86. **Code Mentor Mode** — Pairs with you and teaches, never just dumps code. ⭐⭐⭐⭐ 🟡 — CLI.
-87. **Misconception Hunter** — Quizzes you to find what you *think* you know but don't. ⭐⭐⭐⭐ 🟡 — Claude.
-88. **Foreign Film Decoder** — Watch with AI that explains cultural context live. ⭐⭐⭐ 🟡 — Subtitles + Claude.
-89. **Book-to-Debate** — Reads a book, then argues its thesis with you. ⭐⭐⭐ 🟢 — RAG.
-90. **Exam Crammer** — Syllabus in, optimized study plan + practice tests out. ⭐⭐⭐ 🟡 — Claude.
+81. **Distraction-Free YouTube** — Hide recommendations, comments, shorts. ⭐⭐⭐⭐ 🟢 — extension.
+82. **Tab Session Saver** — Save/restore whole window sessions in a click. ⭐⭐⭐ 🟡 — extension.
+83. **Universal Dark Mode** — Inject a smart dark theme into any site. ⭐⭐⭐⭐ 🟡 — extension.
+84. **Bionic Reading** — Bold the first half of every word to read faster. ⭐⭐⭐ 🟢 — extension.
+85. **Custom New Tab Dashboard** — Clock, todo, quotes, links — your way. ⭐⭐⭐ 🟢 — extension.
+86. **Screenshot Annotator** — Capture, draw arrows/blur, copy. ⭐⭐⭐⭐ 🟡 — extension.
+87. **Price History Tracker** — Chart how a product's price changed over time. ⭐⭐⭐⭐ 🟡 — extension.
+88. **Site Blocker on Timer** — Lock distracting sites during focus hours. ⭐⭐⭐ 🟢 — extension.
+89. **Reading Time + Auto-Outline** — Show read time and a TOC for any article. ⭐⭐⭐ 🟢 — extension.
+90. **Auto Form Filler** — Save profiles, fill repetitive forms instantly. ⭐⭐⭐ 🟡 — extension.
 
 ## 🧪 Category 10 — Weird, Novel & Experimental
 
-91. **The Mirror** — An AI that only speaks back to you in *your own* writing style, getting eerier over time. ⭐⭐⭐⭐⭐ 🟡 — Claude.
-92. **Dead Internet Detector** — Scores how likely any page was written by AI, and why. ⭐⭐⭐⭐ 🟡 — Classifier.
-93. **Pet Translator** — Webcam your pet, get a (playful) running commentary of its "thoughts." ⭐⭐⭐⭐ 🟢 — Vision + Claude.
-94. **Conspiracy Debunker** — Steelmans then dismantles any claim with sources. ⭐⭐⭐⭐ 🟡 — RAG.
-95. **AI That Interviews You** — Asks deep questions to write your biography. ⭐⭐⭐⭐ 🟡 — Claude.
-96. **Reverse Turing Test** — You try to convince a panel of AIs that you're human. ⭐⭐⭐⭐⭐ 🟡 — Multi-agent.
-97. **Object Whisperer** — Point your camera at anything; it tells the object's "life story." ⭐⭐⭐ 🟢 — Vision + Claude.
-98. **Future Headline Generator** — Plausible news from 5/10/50 years out on any topic. ⭐⭐⭐ 🟢 — Claude.
-99. **The Oracle** — Ask one question per day; it answers cryptically, then explains. ⭐⭐⭐ 🟢 — Web app.
-100. **Build-Off** — Two Claude agents race to build the same app; you watch and vote. ⭐⭐⭐⭐⭐ 🔴 — Multi-agent + this DevReel tool.
+91. **ASCII Webcam** — Live video rendered as scrolling text characters. ⭐⭐⭐⭐ 🟢 — Python/JS.
+92. **Matrix Rain** — The iconic green code rain, customizable. ⭐⭐⭐ 🟢 — canvas.
+93. **Mouse Music** — Your cursor movements compose ambient sound. ⭐⭐⭐ 🟢 — Web Audio.
+94. **Markov Poetry** — Generate verse from a word corpus (statistics, *not* AI). ⭐⭐⭐ 🟢 — Python.
+95. **Procedural City Generator** — Endless 3D cities from simple rules. ⭐⭐⭐⭐⭐ 🔴 — Three.js.
+96. **Black Hole Lensing Shader** — Bend light around a singularity, real-time. ⭐⭐⭐⭐⭐ 🔴 — shader.
+97. **Typewriter FX** — Keystrokes make satisfying sounds + ripple visuals. ⭐⭐⭐ 🟢 — JS.
+98. **DIY Internet Radio** — Stream + mix public lo-fi/ambient stations. ⭐⭐⭐ 🟢 — Web Audio.
+99. **Generative Logo Machine** — Algorithmic logos from geometry + symmetry. ⭐⭐⭐⭐ 🟡 — canvas.
+100. **Build-Off Timelapse Wall** — A gallery site that auto-shows all your DevReel timelapses. ⭐⭐⭐⭐ 🟡 — static site.
 
 ---
 
 ## 🎬 How to use this for content
 
-- **Series arc:** "I'm letting Claude build 100 projects." One project per video/reel.
-- **Best openers (highest wow):** #1, #21, #30, #31, #41, #51, #71, #91, #96, #100.
-- **Quick wins (film in a day):** #9, #12, #13, #20, #25, #40, #72, #81, #98.
-- **Multi-part hero projects:** #6, #24, #30, #31, #45, #53.
+- **Series arc:** "100 projects, zero AI — just code." Each one a video/reel.
+- **Best openers (highest wow):** #1, #8, #11, #13, #22, #41, #63, #65, #70, #96.
+- **Quick wins (film in a day):** #7, #12, #14, #16, #34, #41, #49, #92, #97.
+- **Multi-part hero projects:** #3, #5, #6, #61, #65, #70, #72, #95.
 - Use **DevReel** (this repo) to auto-generate the timelapse + recap for every single one.
+
+> "No AI" advantages: no API keys, no per-call cost, runs offline, and viewers see *real* engineering.
 
 > Pick a number and say "build #N" — I'll scaffold it and DevReel will record the whole thing.
 
 ---
-_© 2026 VibeBuild (K.T.) — **VibeBuild**. Free for personal & educational use. Commercial use requires a paid license — see [COMMERCIAL.md](COMMERCIAL.md)._
+_© 2026 **VibeBuild (K.T.)**. Free for personal & educational use. Commercial use requires a paid license — see [COMMERCIAL.md](COMMERCIAL.md)._

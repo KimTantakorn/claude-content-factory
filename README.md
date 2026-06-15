@@ -1,14 +1,14 @@
-# 🎬 VibeBuild — Claude Content Factory
+# 🎬 VibeBuild — Content Factory
 
 > **Build with vibes. Ship with proof.**
-> **Watch AI build 100 projects** — and turn every build into a YouTube video, Instagram Reel, and GitHub repo, automatically.
+> **100 projects, zero AI — pure code** — and turn every build into a YouTube video, Instagram Reel, and GitHub repo, automatically.
 
 [![License: Noncommercial](https://img.shields.io/badge/license-PolyForm%20Noncommercial-blue)](LICENSE.md)
 &nbsp;© 2026 VibeBuild (K.T.)
 
 This repo has two things:
 
-1. **[`IDEAS.md`](IDEAS.md)** — 100 curated, buildable Claude project ideas, ranked by *wow factor* and build time. Your content backlog.
+1. **[`IDEAS.md`](IDEAS.md)** — 100 curated, buildable **no-AI** project ideas (physics, graphics, algorithms, data), ranked by *wow factor* and build time. Your content backlog.
 2. **`devreel.py`** — **DevReel**, a tool that turns any coding session into shareable content: a screen recording, a git-history *timelapse* video, a written *recap*, and a 9:16 *reel*.
 
 ---
