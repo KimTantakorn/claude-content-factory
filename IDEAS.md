@@ -1,4 +1,6 @@
-# 💯 100 Claude Projects — "Watch Claude Build" Series
+<!-- © 2026 Kim Tantakorn — VibeBuild. Noncommercial use only; commercial use requires a license (see COMMERCIAL.md). -->
+
+# 💯 100 Claude Projects — a VibeBuild Series
 
 A curated list of 100 buildable project ideas, designed for a YouTube + Instagram Reels + GitHub content series.
 Each idea has a **pitch**, a **wow factor** (what makes it clip-worthy), a **difficulty** (⏱️ build time), and a **stack**.
@@ -149,3 +151,6 @@ Each idea has a **pitch**, a **wow factor** (what makes it clip-worthy), a **dif
 - Use **DevReel** (this repo) to auto-generate the timelapse + recap for every single one.
 
 > Pick a number and say "build #N" — I'll scaffold it and DevReel will record the whole thing.
+
+---
+_© 2026 Kim Tantakorn — **VibeBuild**. Free for personal & educational use. Commercial use requires a paid license — see [COMMERCIAL.md](COMMERCIAL.md)._

@@ -1,6 +1,10 @@
-# 🎬 Claude Content Factory
+# 🎬 VibeBuild — Claude Content Factory
 
-> **Watch Claude build 100 projects** — and turn every build into a YouTube video, Instagram Reel, and GitHub repo, automatically.
+> **Build with vibes. Ship with proof.**
+> **Watch AI build 100 projects** — and turn every build into a YouTube video, Instagram Reel, and GitHub repo, automatically.
+
+[![License: Noncommercial](https://img.shields.io/badge/license-PolyForm%20Noncommercial-blue)](LICENSE.md)
+&nbsp;© 2026 Kim Tantakorn — VibeBuild
 
 This repo has two things:
 
@@ -70,5 +74,17 @@ python devreel.py reel --input builds/session.mp4 --out builds/reel.mp4
 - [ ] Auto-captions burned into the reel
 - [ ] One-command "build → record → timelapse → recap → publish"
 - [ ] Thumbnail generator
+
+## 📄 License
+
+© 2026 **Kim Tantakorn — VibeBuild**. Released under the
+[PolyForm Noncommercial License 1.0.0](LICENSE.md).
+
+- ✅ **Free** for personal, educational, and nonprofit use.
+- 💼 **Commercial use** (apps, products, business, revenue) **requires a paid license** — see [COMMERCIAL.md](COMMERCIAL.md) or email kimtantakorn@gmail.com.
+
+All generated videos and recaps are watermarked `VibeBuild · © Kim Tantakorn`.
+
+---
 
 Built with [Claude Code](https://claude.com/claude-code).

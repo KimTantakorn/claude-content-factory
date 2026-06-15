@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# =============================================================================
+#  DevReel  —  part of VibeBuild
+#  © 2026 Kim Tantakorn (VibeBuild). All rights reserved.
+#  Licensed under PolyForm Noncommercial 1.0.0 — see LICENSE.md.
+#  Commercial use (apps, products, business) requires a paid license:
+#  see COMMERCIAL.md or email kimtantakorn@gmail.com.
+# =============================================================================
 """
 DevReel - turn a coding session into shareable content.
 
@@ -53,6 +60,10 @@ def find_ffmpeg() -> str:
         if hits:
             return str(hits[0])
     die("ffmpeg not found. Install it (winget install Gyan.FFmpeg) or set DEVREEL_FFMPEG=path\\to\\ffmpeg.exe")
+
+
+WATERMARK = "VibeBuild · © Kim Tantakorn"
+BANNER = "DevReel · VibeBuild · © 2026 Kim Tantakorn · Noncommercial license (see LICENSE.md)"
 
 
 def die(msg: str) -> "NoReturn":  # type: ignore[name-defined]
@@ -143,6 +154,15 @@ def _render_code_frame(text: str, caption: str, w: int, h: int, out_path: Path) 
     for ln in text.splitlines()[:max_lines]:
         d.text((24, y), ln[:110], font=font, fill=fg)
         y += line_h
+
+    # watermark (bottom-right) — VibeBuild / author copyright
+    wm_font = _load_font(18)
+    wm = WATERMARK
+    try:
+        tw = d.textlength(wm, font=wm_font)
+    except Exception:
+        tw = len(wm) * 9
+    d.text((w - tw - 24, h - 34), wm, font=wm_font, fill=(110, 118, 129))
     img.save(out_path)
 
 
@@ -214,6 +234,8 @@ def cmd_recap(a: argparse.Namespace) -> None:
         f"- \"I let Claude build {project} from scratch 👀\"",
         f"- \"{len(commits)} commits, {inserts}+ lines, 1 AI. Watch it cook.\"",
         "- \"This took minutes, not days. #buildinpublic #ai\"",
+        f"\n---\n_© {dt.date.today().year} Kim Tantakorn — VibeBuild. "
+        "Noncommercial use only; commercial use requires a license (COMMERCIAL.md)._",
     ]
 
     text = "\n".join(lines)
@@ -271,6 +293,7 @@ def main() -> None:
     e.set_defaults(func=cmd_reel)
 
     a = p.parse_args()
+    info(BANNER)
     a.func(a)
 
 
