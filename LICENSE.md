@@ -2,7 +2,7 @@
 
 <https://polyformproject.org/licenses/noncommercial/1.0.0>
 
-**Required Notice:** Copyright © 2026 Kim Tantakorn — VibeBuild (https://github.com/KimTantakorn)
+**Required Notice:** Copyright © 2026 VibeBuild (K.T.) (https://github.com/KimTantakorn)
 
 ## Acceptance
 
@@ -34,7 +34,7 @@ them above, as well as copies of any plain-text lines beginning
 with `Required Notice:` that the licensor provided with the
 software. For example:
 
-> Required Notice: Copyright © 2026 Kim Tantakorn — VibeBuild
+> Required Notice: Copyright © 2026 VibeBuild (K.T.)
 
 ## Changes and New Works License
 
@@ -136,5 +136,5 @@ This project is **free for personal, educational, and other noncommercial use**.
 **Any commercial use — including building a product, app, or business on top of
 it, or using it to generate revenue — requires a paid commercial license.**
 
-See [COMMERCIAL.md](COMMERCIAL.md) and contact **Kim Tantakorn**
+See [COMMERCIAL.md](COMMERCIAL.md) and contact **VibeBuild (K.T.)**
 (kimtantakorn@gmail.com) to obtain one.

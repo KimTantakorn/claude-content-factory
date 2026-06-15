@@ -4,7 +4,7 @@
 > **Watch AI build 100 projects** — and turn every build into a YouTube video, Instagram Reel, and GitHub repo, automatically.
 
 [![License: Noncommercial](https://img.shields.io/badge/license-PolyForm%20Noncommercial-blue)](LICENSE.md)
-&nbsp;© 2026 Kim Tantakorn — VibeBuild
+&nbsp;© 2026 VibeBuild (K.T.)
 
 This repo has two things:
 
@@ -77,13 +77,13 @@ python devreel.py reel --input builds/session.mp4 --out builds/reel.mp4
 
 ## 📄 License
 
-© 2026 **Kim Tantakorn — VibeBuild**. Released under the
+© 2026 **VibeBuild (K.T.)**. Released under the
 [PolyForm Noncommercial License 1.0.0](LICENSE.md).
 
 - ✅ **Free** for personal, educational, and nonprofit use.
 - 💼 **Commercial use** (apps, products, business, revenue) **requires a paid license** — see [COMMERCIAL.md](COMMERCIAL.md) or email kimtantakorn@gmail.com.
 
-All generated videos and recaps are watermarked `VibeBuild · © Kim Tantakorn`.
+All generated videos and recaps are watermarked `© VibeBuild (K.T.)`.
 
 ---
 

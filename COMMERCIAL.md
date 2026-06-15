@@ -11,7 +11,7 @@ You may use, copy, modify, and share this software at no cost for:
 - Nonprofit / charitable / government use
 
 ## 💰 Requires a paid license
-You must purchase a commercial license from **Kim Tantakorn (VibeBuild)** if you:
+You must purchase a commercial license from **VibeBuild (K.T.)** if you:
 - Build a **product, app, or service** that uses this code (in whole or in part)
 - Use it **inside a company** or for any work that makes money
 - Offer it (or a derivative) to customers, paid or free, as part of a business
@@ -21,7 +21,7 @@ You must purchase a commercial license from **Kim Tantakorn (VibeBuild)** if you
 
 ## 📩 Get a commercial license
 Contact the author to discuss terms and pricing:
-- **Name:** Kim Tantakorn
+- **Name:** VibeBuild (K.T.)
 - **Email:** kimtantakorn@gmail.com
 - **GitHub:** https://github.com/KimTantakorn
 
@@ -29,9 +29,9 @@ Licensing is flexible — solo devs, startups, and enterprises get different ter
 Reach out and we'll sort out something fair.
 
 ## 🛡️ Enforcement
-This code is watermarked and the copyright is held by Kim Tantakorn. Using it
+This code is watermarked and the copyright is held by VibeBuild (K.T.). Using it
 commercially without a license is copyright infringement. Honest builders get a
 fair deal — please just ask first.
 
 ---
-_© 2026 Kim Tantakorn — VibeBuild. All rights reserved._
+_© 2026 VibeBuild (K.T.). All rights reserved._

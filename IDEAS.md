@@ -1,4 +1,4 @@
-<!-- © 2026 Kim Tantakorn — VibeBuild. Noncommercial use only; commercial use requires a license (see COMMERCIAL.md). -->
+<!-- © 2026 VibeBuild (K.T.). Noncommercial use only; commercial use requires a license (see COMMERCIAL.md). -->
 
 # 💯 100 Claude Projects — a VibeBuild Series
 
@@ -153,4 +153,4 @@ Each idea has a **pitch**, a **wow factor** (what makes it clip-worthy), a **dif
 > Pick a number and say "build #N" — I'll scaffold it and DevReel will record the whole thing.
 
 ---
-_© 2026 Kim Tantakorn — **VibeBuild**. Free for personal & educational use. Commercial use requires a paid license — see [COMMERCIAL.md](COMMERCIAL.md)._
+_© 2026 VibeBuild (K.T.) — **VibeBuild**. Free for personal & educational use. Commercial use requires a paid license — see [COMMERCIAL.md](COMMERCIAL.md)._

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # =============================================================================
 #  DevReel  —  part of VibeBuild
-#  © 2026 Kim Tantakorn (VibeBuild). All rights reserved.
+#  © 2026 VibeBuild (K.T.). All rights reserved.
 #  Licensed under PolyForm Noncommercial 1.0.0 — see LICENSE.md.
 #  Commercial use (apps, products, business) requires a paid license:
 #  see COMMERCIAL.md or email kimtantakorn@gmail.com.
@@ -62,8 +62,8 @@ def find_ffmpeg() -> str:
     die("ffmpeg not found. Install it (winget install Gyan.FFmpeg) or set DEVREEL_FFMPEG=path\\to\\ffmpeg.exe")
 
 
-WATERMARK = "VibeBuild · © Kim Tantakorn"
-BANNER = "DevReel · VibeBuild · © 2026 Kim Tantakorn · Noncommercial license (see LICENSE.md)"
+WATERMARK = "© VibeBuild (K.T.)"
+BANNER = "DevReel · VibeBuild · © 2026 VibeBuild (K.T.) · Noncommercial license (see LICENSE.md)"
 
 
 def die(msg: str) -> "NoReturn":  # type: ignore[name-defined]
@@ -234,7 +234,7 @@ def cmd_recap(a: argparse.Namespace) -> None:
         f"- \"I let Claude build {project} from scratch 👀\"",
         f"- \"{len(commits)} commits, {inserts}+ lines, 1 AI. Watch it cook.\"",
         "- \"This took minutes, not days. #buildinpublic #ai\"",
-        f"\n---\n_© {dt.date.today().year} Kim Tantakorn — VibeBuild. "
+        f"\n---\n_© {dt.date.today().year} VibeBuild (K.T.). "
         "Noncommercial use only; commercial use requires a license (COMMERCIAL.md)._",
     ]
 

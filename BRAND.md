@@ -41,7 +41,7 @@ Energetic, builder-to-builder, no fluff. Show the work, show the wins *and* the 
 | Muted / watermark | `#6E7681` |
 
 ## Watermark
-Every generated video + recap carries: **`VibeBuild · © Kim Tantakorn`**
+Every generated video + recap carries: **`© VibeBuild (K.T.)`**
 This is your authorship mark — keep it on all published content.
 
 ## Posting cadence (suggested)
@@ -50,4 +50,4 @@ This is your authorship mark — keep it on all published content.
 - **GitHub:** push every project repo; pin the best ones
 
 ---
-_© 2026 Kim Tantakorn — VibeBuild. All rights reserved._
+_© 2026 VibeBuild (K.T.). All rights reserved._
