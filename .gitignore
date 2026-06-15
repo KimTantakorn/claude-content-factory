@@ -1,0 +1,15 @@
+# DevReel output
+builds/
+*.mp4
+*.mov
+RECAP.md
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
