@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!-- © 2026 VibeBuild (K.T.) — Noncommercial. Commercial use requires a license. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Double Pendulum · VibeBuild</title>
+<style>
+  html,body{margin:0;height:100%;background:#0d1117;color:#c9d1d9;font-family:system-ui,sans-serif;
+       display:flex;flex-direction:column;align-items:center;overflow:hidden}
+  h1{font-size:18px;margin:12px 0 4px}
+  canvas{border:1px solid #21262d;border-radius:8px;background:#010409}
+  .bar{margin:8px;display:flex;gap:8px}
+  button{background:#161b22;color:#c9d1d9;border:1px solid #30363d;border-radius:6px;padding:6px 12px;cursor:pointer}
+  .wm{color:#6e7681;font-size:12px;margin:6px}
+</style>
+</head>
+<body>
+<h1>🌀 Double Pendulum — Chaos</h1>
+<div class="bar"><button id="reset">Drop again</button><button id="multi">Toggle 5 (sensitivity)</button></div>
+<canvas id="c" width="600" height="560"></canvas>
+<div class="wm">© VibeBuild (K.T.) · tiny differences → totally different paths</div>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+const ox=c.width/2,oy=200,L1=130,L2=130,m1=12,m2=12,g=1;
+let pends,trail,multi=false;
+function mk(a1){return {a1,a2:Math.PI/2,v1:0,v2:0,trail:[],hue:Math.random()*360};}
+function reset(){pends=multi?Array.from({length:5},(_,i)=>mk(Math.PI/2+0.0001*i)):[mk(Math.PI*0.9)];
+  x.fillStyle='#010409';x.fillRect(0,0,c.width,c.height);}
+function physics(p){
+  const{a1,a2,v1,v2}=p;
+  const d=a1-a2,den=2*m1+m2-m2*Math.cos(2*d);
+  const a1a=(-g*(2*m1+m2)*Math.sin(a1)-m2*g*Math.sin(a1-2*a2)-2*Math.sin(d)*m2*(v2*v2*L2+v1*v1*L1*Math.cos(d)))/(L1*den);
+  const a2a=(2*Math.sin(d)*(v1*v1*L1*(m1+m2)+g*(m1+m2)*Math.cos(a1)+v2*v2*L2*m2*Math.cos(d)))/(L2*den);
+  p.v1+=a1a;p.v2+=a2a;p.a1+=p.v1;p.a2+=p.v2;
+}
+function frame(){
+  x.fillStyle='rgba(1,4,9,0.25)';x.fillRect(0,0,c.width,c.height);
+  for(const p of pends){
+    for(let k=0;k<2;k++)physics(p);
+    const x1=ox+L1*Math.sin(p.a1),y1=oy+L1*Math.cos(p.a1);
+    const x2=x1+L2*Math.sin(p.a2),y2=y1+L2*Math.cos(p.a2);
+    p.trail.push([x2,y2]);if(p.trail.length>320)p.trail.shift();
+    x.strokeStyle=`hsla(${p.hue},80%,60%,0.6)`;x.lineWidth=1.5;x.beginPath();
+    p.trail.forEach((t,i)=>i?x.lineTo(t[0],t[1]):x.moveTo(t[0],t[1]));x.stroke();
+    if(!multi){
+      x.strokeStyle='#8b949e';x.lineWidth=3;x.beginPath();x.moveTo(ox,oy);x.lineTo(x1,y1);x.lineTo(x2,y2);x.stroke();
+      x.fillStyle='#58a6ff';x.beginPath();x.arc(x1,y1,m1*0.7,0,7);x.fill();
+      x.fillStyle='#f78166';x.beginPath();x.arc(x2,y2,m2*0.7,0,7);x.fill();
+    }
+  }
+  requestAnimationFrame(frame);
+}
+document.getElementById('reset').onclick=reset;
+document.getElementById('multi').onclick=()=>{multi=!multi;reset();};
+reset();frame();
+</script>
+</body>
+</html>

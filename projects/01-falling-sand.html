@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!-- © 2026 VibeBuild (K.T.) — Noncommercial. Commercial use requires a license. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Falling Sand · VibeBuild</title>
+<style>
+  :root{--bg:#0d1117;--fg:#c9d1d9;--accent:#58a6ff;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,Segoe UI,Roboto,sans-serif;
+       display:flex;flex-direction:column;align-items:center;min-height:100vh}
+  h1{font-size:18px;margin:14px 0 6px;letter-spacing:.5px}
+  canvas{border:1px solid #21262d;border-radius:8px;cursor:crosshair;touch-action:none;background:#000}
+  .bar{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px;align-items:center}
+  button{background:#161b22;color:var(--fg);border:1px solid #30363d;border-radius:6px;padding:6px 12px;cursor:pointer}
+  button.active{outline:2px solid var(--accent)}
+  .wm{color:#6e7681;font-size:12px;margin:8px}
+  label{font-size:13px;color:#8b949e}
+</style>
+</head>
+<body>
+  <h1>🏖️ Falling Sand</h1>
+  <div class="bar">
+    <button data-m="sand" class="active">Sand</button>
+    <button data-m="water">Water</button>
+    <button data-m="wall">Wall</button>
+    <button data-m="fire">Fire</button>
+    <button data-m="plant">Plant</button>
+    <button data-m="empty">Eraser</button>
+    <label>Brush <input id="brush" type="range" min="1" max="12" value="4"></label>
+    <button id="clear">Clear</button>
+  </div>
+  <canvas id="c" width="500" height="400"></canvas>
+  <div class="wm">© VibeBuild (K.T.) · drag to draw</div>
+<script>
+const cv=document.getElementById('c'),ctx=cv.getContext('2d');
+const S=4, W=cv.width/S|0, H=cv.height/S|0;       // cell size & grid dims
+const EMPTY=0,SAND=1,WATER=2,WALL=3,FIRE=4,PLANT=5;
+const COLORS={1:[214,178,94],2:[64,140,255],3:[110,118,129],4:[255,110,40],5:[63,185,80]};
+let grid=new Uint8Array(W*H), tone=new Uint8Array(W*H); // tone=color variation
+const img=ctx.createImageData(cv.width,cv.height);
+let mode=SAND, drawing=false, brush=4, mx=0,my=0;
+const idx=(x,y)=>y*W+x;
+const inb=(x,y)=>x>=0&&x<W&&y>=0&&y<H;
+
+document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('[data-m]').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); mode={sand:SAND,water:WATER,wall:WALL,fire:FIRE,plant:PLANT,empty:EMPTY}[b.dataset.m];
+});
+document.getElementById('clear').onclick=()=>grid.fill(0);
+document.getElementById('brush').oninput=e=>brush=+e.target.value;
+
+function pos(e){const r=cv.getBoundingClientRect();const t=e.touches?e.touches[0]:e;
+  mx=((t.clientX-r.left)/r.width*cv.width/S)|0; my=((t.clientY-r.top)/r.height*cv.height/S)|0;}
+cv.addEventListener('pointerdown',e=>{drawing=true;pos(e);});
+cv.addEventListener('pointermove',e=>{pos(e);});
+addEventListener('pointerup',()=>drawing=false);
+
+function paint(){ for(let dy=-brush;dy<=brush;dy++)for(let dx=-brush;dx<=brush;dx++){
+  if(dx*dx+dy*dy>brush*brush)continue; const x=mx+dx,y=my+dy; if(!inb(x,y))continue;
+  if(mode===EMPTY||grid[idx(x,y)]===EMPTY){ if(mode===WATER&&Math.random()<.4&&grid[idx(x,y)])continue;
+    grid[idx(x,y)]=mode; tone[idx(x,y)]=Math.random()*40|0; } } }
+
+function step(){
+  for(let y=H-1;y>=0;y--){
+    const l2r=Math.random()<.5;
+    for(let i=0;i<W;i++){ const x=l2r?i:W-1-i; const c=grid[idx(x,y)]; if(!c||c===WALL)continue;
+      if(c===SAND){ if(move(x,y,x,y+1)||move(x,y,x+(Math.random()<.5?-1:1),y+1)){} }
+      else if(c===WATER){ if(!move(x,y,x,y+1)){ const d=Math.random()<.5?-1:1;
+        if(!move(x,y,x+d,y+1)&&!move(x,y,x-d,y+1)&&!move(x,y,x+d,y)) move(x,y,x-d,y);} }
+      else if(c===FIRE){ // rises, dies, ignites plant
+        for(const[ax,ay]of[[x,y-1],[x-1,y],[x+1,y],[x,y+1]]) if(inb(ax,ay)&&grid[idx(ax,ay)]===PLANT&&Math.random()<.3){grid[idx(ax,ay)]=FIRE;tone[idx(ax,ay)]=0;}
+        if(Math.random()<.08){grid[idx(x,y)]=EMPTY;} else { if(inb(x,y-1)&&grid[idx(x,y-1)]===EMPTY&&Math.random()<.3){grid[idx(x,y-1)]=FIRE;grid[idx(x,y)]=EMPTY;} } }
+      else if(c===PLANT){ // grows into adjacent water
+        for(const[ax,ay]of[[x,y-1],[x-1,y],[x+1,y]]) if(inb(ax,ay)&&grid[idx(ax,ay)]===WATER&&Math.random()<.02){grid[idx(ax,ay)]=PLANT;tone[idx(ax,ay)]=Math.random()*40|0;} }
+    }
+  }
+}
+function move(x,y,nx,ny){ if(!inb(nx,ny))return false; const t=grid[idx(nx,ny)];
+  const c=grid[idx(x,y)]; const swap=(t===EMPTY)||(c===SAND&&t===WATER);
+  if(swap){ grid[idx(nx,ny)]=c; grid[idx(x,y)]=t; const tt=tone[idx(nx,ny)];tone[idx(nx,ny)]=tone[idx(x,y)];tone[idx(x,y)]=tt; return true;} return false; }
+
+function render(){ const d=img.data;
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++){ const c=grid[idx(x,y)]; let r=0,g=0,b=0;
+    if(c){ const col=COLORS[c],v=tone[idx(x,y)]-20; r=col[0]+v;g=col[1]+v;b=col[2]+v; }
+    for(let py=0;py<S;py++)for(let px=0;px<S;px++){ const p=((y*S+py)*cv.width+(x*S+px))*4;
+      d[p]=r;d[p+1]=g;d[p+2]=b;d[p+3]=255; } }
+  ctx.putImageData(img,0,0);
+}
+function loop(){ if(drawing)paint(); step(); render(); requestAnimationFrame(loop); }
+loop();
+</script>
+</body>
+</html>

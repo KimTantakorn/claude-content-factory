@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!-- © 2026 VibeBuild (K.T.) — Noncommercial. Commercial use requires a license. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Typing Speed Test · VibeBuild</title>
+<style>
+  html,body{margin:0;min-height:100%;background:#0d1117;color:#c9d1d9;font-family:system-ui,sans-serif;
+       display:flex;flex-direction:column;align-items:center}
+  h1{font-size:18px;margin:16px 0 6px}
+  #words{max-width:760px;font-size:24px;line-height:1.7;letter-spacing:.5px;padding:18px;
+    background:#010409;border:1px solid #21262d;border-radius:10px;margin:8px;font-family:ui-monospace,monospace}
+  .c{color:#3fb950}.w{color:#f85149;text-decoration:underline}.cur{background:#1f6feb;border-radius:2px;color:#fff}
+  .u{color:#484f58}
+  #stat{font-size:15px;color:#8b949e;margin:6px}
+  button{background:#161b22;color:#c9d1d9;border:1px solid #30363d;border-radius:6px;padding:8px 16px;cursor:pointer;margin:6px}
+  #inp{position:absolute;opacity:0;left:-9999px}
+  .wm{color:#6e7681;font-size:12px;margin:8px}
+</style>
+</head>
+<body>
+<h1>⌨️ Typing Speed Test</h1>
+<div id="words" tabindex="0"></div>
+<div id="stat">click the text and start typing…</div>
+<button id="restart">Restart</button>
+<div class="wm">© VibeBuild (K.T.)</div>
+<input id="inp" autocomplete="off">
+<script>
+const BANK="the quick brown fox jumps over a lazy dog while bright code flows like water through silent valleys and every builder ships another small idea into the wide open world without fear of failing fast".split(' ');
+const wordsEl=document.getElementById('words'),stat=document.getElementById('stat'),inp=document.getElementById('inp');
+let target='',typed='',started=0,done=false;
+function gen(){target=Array.from({length:32},()=>BANK[Math.random()*BANK.length|0]).join(' ');typed='';started=0;done=false;render();}
+function render(){
+  let html='';
+  for(let i=0;i<target.length;i++){
+    let cls='u';
+    if(i<typed.length)cls=typed[i]===target[i]?'c':'w';
+    if(i===typed.length)cls='cur';
+    const ch=target[i]==' '? (cls==='w'?'␣':' ') : target[i];
+    html+=`<span class="${cls}">${ch}</span>`;
+  }
+  wordsEl.innerHTML=html;
+  if(started){const mins=(Date.now()-started)/60000;const correct=[...typed].filter((ch,i)=>ch===target[i]).length;
+    const wpm=Math.round((correct/5)/Math.max(mins,1/600));const acc=Math.round(correct/Math.max(typed.length,1)*100);
+    stat.textContent=`${wpm} WPM · ${acc}% accuracy · ${typed.length}/${target.length}`;}
+}
+wordsEl.onclick=()=>inp.focus();
+inp.addEventListener('input',e=>{
+  if(!started)started=Date.now();
+  typed=e.target.value.slice(0,target.length);
+  if(typed.length>=target.length&&!done){done=true;
+    const mins=(Date.now()-started)/60000;const correct=[...typed].filter((ch,i)=>ch===target[i]).length;
+    const wpm=Math.round((correct/5)/Math.max(mins,1/600));
+    stat.innerHTML=`<b style="color:#3fb950">Done! ${wpm} WPM</b> · ${Math.round(correct/typed.length*100)}% accuracy`;}
+  render();
+});
+document.getElementById('restart').onclick=()=>{inp.value='';gen();inp.focus();};
+gen();
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!-- © 2026 VibeBuild (K.T.) — Noncommercial. Commercial use requires a license. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fractal Explorer · VibeBuild</title>
+<style>
+  html,body{margin:0;height:100%;background:#0d1117;overflow:hidden;font-family:system-ui,sans-serif}
+  canvas{display:block;cursor:crosshair}
+  .ui{position:fixed;top:12px;left:12px;color:#c9d1d9;font-size:13px;background:#161b22cc;
+      border:1px solid #30363d;border-radius:8px;padding:10px 12px;max-width:240px}
+  .ui b{color:#58a6ff}
+  button{background:#21262d;color:#c9d1d9;border:1px solid #30363d;border-radius:6px;padding:5px 10px;cursor:pointer;margin-top:6px}
+  .wm{position:fixed;bottom:10px;right:12px;color:#6e7681;font-size:12px}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="ui"><b>🔭 Fractal Explorer</b><br>Mandelbrot set. <br>Scroll to zoom · drag to pan · double-click to center.
+  <br><button id="reset">Reset view</button><div id="info" style="margin-top:6px;color:#8b949e"></div></div>
+<div class="wm">© VibeBuild (K.T.)</div>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+let W,H,img;function size(){W=c.width=innerWidth;H=c.height=innerHeight;img=x.createImageData(W,H);render();}
+addEventListener('resize',size);
+let cx=-0.6,cy=0,scale=3,maxIt=200;
+function color(it){ if(it===maxIt)return [0,0,0];
+  const t=it/maxIt; return [ 9+255*Math.sqrt(t)*0.6, 17+200*t*t, 40+255*t ]; }
+function render(){
+  maxIt=Math.min(800,120+Math.log2(3/scale)*40|0);
+  const d=img.data;
+  for(let py=0;py<H;py++){ const y0=cy+(py-H/2)/H*scale;
+    for(let px=0;px<W;px++){ const x0=cx+(px-W/2)/H*scale;
+      let xr=0,xi=0,it=0; while(xr*xr+xi*xi<=4&&it<maxIt){const xt=xr*xr-xi*xi+x0;xi=2*xr*xi+y0;xr=xt;it++;}
+      const[r,g,b]=color(it); const p=(py*W+px)*4; d[p]=r;d[p+1]=g;d[p+2]=b;d[p+3]=255; } }
+  x.putImageData(img,0,0);
+  document.getElementById('info').textContent=`zoom ${(3/scale).toExponential(1)}× · ${maxIt} iters`;
+}
+c.addEventListener('wheel',e=>{e.preventDefault();const f=e.deltaY<0?0.8:1.25;
+  const mx=cx+(e.clientX-W/2)/H*scale,my=cy+(e.clientY-H/2)/H*scale;
+  scale*=f; cx=mx+(cx-mx)*f; cy=my+(cy-my)*f; render();},{passive:false});
+let drag=null;
+c.addEventListener('pointerdown',e=>drag={x:e.clientX,y:e.clientY,cx,cy});
+c.addEventListener('pointermove',e=>{if(!drag)return;cx=drag.cx-(e.clientX-drag.x)/H*scale;cy=drag.cy-(e.clientY-drag.y)/H*scale;render();});
+addEventListener('pointerup',()=>drag=null);
+c.addEventListener('dblclick',e=>{cx+=(e.clientX-W/2)/H*scale;cy+=(e.clientY-H/2)/H*scale;scale*=0.5;render();});
+document.getElementById('reset').onclick=()=>{cx=-0.6;cy=0;scale=3;render();};
+size();
+</script>
+</body>
+</html>

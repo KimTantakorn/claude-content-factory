@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!-- © 2026 VibeBuild (K.T.) — Noncommercial. Commercial use requires a license. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Life in Weeks · VibeBuild</title>
+<style>
+  html,body{margin:0;background:#0d1117;color:#c9d1d9;font-family:system-ui,sans-serif;
+       display:flex;flex-direction:column;align-items:center;min-height:100vh}
+  h1{font-size:20px;margin:16px 0 4px} p{color:#8b949e;margin:4px 0 12px;font-size:14px}
+  .bar{display:flex;gap:8px;align-items:center;margin-bottom:10px}
+  input{background:#161b22;color:#c9d1d9;border:1px solid #30363d;border-radius:6px;padding:6px 10px}
+  canvas{border:1px solid #21262d;border-radius:8px;background:#010409;max-width:96vw}
+  .lg{display:flex;gap:16px;font-size:13px;margin:10px;color:#8b949e}
+  .dot{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:middle}
+  .wm{color:#6e7681;font-size:12px;margin:8px}
+</style>
+</head>
+<body>
+<h1>⏳ Your Life in Weeks</h1>
+<p>Each box is one week of a 90-year life. The filled ones are already gone.</p>
+<div class="bar">Born: <input id="dob" type="date" value="2000-01-01"><button id="go" style="cursor:pointer">Show</button></div>
+<canvas id="c" width="960" height="560"></canvas>
+<div class="lg"><span><span class="dot" style="background:#f78166"></span>Lived</span>
+  <span><span class="dot" style="background:#1f6feb"></span>This week</span>
+  <span><span class="dot" style="background:#21262d"></span>To come</span></div>
+<div class="wm">© VibeBuild (K.T.)</div>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+const YEARS=90,WPY=52, cols=WPY, rows=YEARS;
+const pad=40, gw=(c.width-pad*2)/cols, gh=(c.height-pad*2)/rows, s=Math.min(gw,gh)-1.5;
+function render(){
+  const dob=new Date(document.getElementById('dob').value);
+  const now=new Date();
+  const lived=Math.max(0,Math.floor((now-dob)/(7*864e5)));
+  x.fillStyle='#010409';x.fillRect(0,0,c.width,c.height);
+  for(let y=0;y<rows;y++)for(let w=0;w<cols;w++){
+    const i=y*cols+w; const px=pad+w*gw, py=pad+y*gh;
+    x.fillStyle = i<lived?'#f78166' : i===lived?'#1f6feb' : '#21262d';
+    x.fillRect(px,py,s,s);
+  }
+  x.fillStyle='#8b949e';x.font='11px system-ui';
+  x.fillText('→ weeks of the year',pad,pad-12);
+  x.save();x.translate(14,pad+10);x.rotate(-Math.PI/2);x.fillText('← age in years',0,0);x.restore();
+  x.fillStyle='#c9d1d9';x.font='13px system-ui';
+  x.fillText(`${lived.toLocaleString()} weeks lived · ${(YEARS*52-lived).toLocaleString()} remaining`,pad,c.height-12);
+}
+document.getElementById('go').onclick=render;
+document.getElementById('dob').onchange=render;
+render();
+</script>
+</body>
+</html>

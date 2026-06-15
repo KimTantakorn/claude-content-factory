@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!-- © 2026 VibeBuild (K.T.) — Noncommercial. Commercial use requires a license. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Game of Life · VibeBuild</title>
+<style>
+  html,body{margin:0;height:100%;background:#0d1117;color:#c9d1d9;font-family:system-ui,sans-serif;
+       display:flex;flex-direction:column;align-items:center}
+  h1{font-size:18px;margin:12px 0 6px}
+  canvas{border:1px solid #21262d;border-radius:8px;background:#010409;cursor:crosshair}
+  .bar{margin:10px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+  button,select{background:#161b22;color:#c9d1d9;border:1px solid #30363d;border-radius:6px;padding:6px 12px;cursor:pointer}
+  .wm{color:#6e7681;font-size:12px;margin:6px}
+</style>
+</head>
+<body>
+<h1>🦠 Conway's Game of Life</h1>
+<div class="bar">
+  <button id="play">⏸ Pause</button><button id="step">Step</button>
+  <button id="rand">Random</button><button id="clear">Clear</button>
+  <select id="pat"><option value="">Insert pattern…</option><option value="glider">Glider</option>
+  <option value="gun">Gosper Gun</option><option value="pulsar">Pulsar</option></select>
+  <span id="gen" style="align-self:center;color:#8b949e;font-size:13px"></span>
+</div>
+<canvas id="c" width="720" height="480"></canvas>
+<div class="wm">© VibeBuild (K.T.) · click/drag to toggle cells</div>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+const S=6,W=c.width/S,H=c.height/S;
+let g=new Uint8Array(W*H),playing=true,gen=0;
+const I=(i,j)=>((j+H)%H)*W+((i+W)%W);
+function rand(){for(let k=0;k<g.length;k++)g[k]=Math.random()<0.22?1:0;gen=0;}
+function clear(){g.fill(0);gen=0;}
+function step(){const n=new Uint8Array(g.length);
+  for(let j=0;j<H;j++)for(let i=0;i<W;i++){let c8=0;
+    for(let dj=-1;dj<=1;dj++)for(let di=-1;di<=1;di++){if(di||dj)c8+=g[I(i+di,j+dj)];}
+    n[I(i,j)]=(g[I(i,j)]?(c8===2||c8===3):(c8===3))?1:0;}
+  g=n;gen++;}
+function draw(){x.fillStyle='#010409';x.fillRect(0,0,c.width,c.height);
+  for(let j=0;j<H;j++)for(let i=0;i<W;i++)if(g[I(i,j)]){
+    x.fillStyle=`hsl(${(140+ i*0.6)%360},70%,60%)`;x.fillRect(i*S,j*S,S-1,S-1);}
+  document.getElementById('gen').textContent='gen '+gen+' · pop '+g.reduce((a,b)=>a+b,0);}
+function loop(){if(playing)step();draw();requestAnimationFrame(loop);}
+// drawing
+let down=false,erase=false;
+function cell(e){const r=c.getBoundingClientRect();return [((e.clientX-r.left)/r.width*W)|0,((e.clientY-r.top)/r.height*H)|0];}
+c.addEventListener('pointerdown',e=>{down=true;const[i,j]=cell(e);erase=!!g[I(i,j)];g[I(i,j)]=erase?0:1;draw();});
+c.addEventListener('pointermove',e=>{if(!down)return;const[i,j]=cell(e);g[I(i,j)]=erase?0:1;draw();});
+addEventListener('pointerup',()=>down=false);
+// patterns
+const PAT={glider:[[1,0],[2,1],[0,2],[1,2],[2,2]],
+  pulsar:(()=>{const p=[];const s=[2,3,4,8,9,10];for(const a of s){p.push([a,0],[a,5],[a,7],[a,12],[0,a],[5,a],[7,a],[12,a]);}return p;})(),
+  gun:[[24,0],[22,1],[24,1],[12,2],[13,2],[20,2],[21,2],[34,2],[35,2],[11,3],[15,3],[20,3],[21,3],[34,3],[35,3],[0,4],[1,4],[10,4],[16,4],[20,4],[21,4],[0,5],[1,5],[10,5],[14,5],[16,5],[17,5],[22,5],[24,5],[10,6],[16,6],[24,6],[11,7],[15,7],[12,8],[13,8]]};
+document.getElementById('pat').onchange=e=>{const p=PAT[e.target.value];if(!p)return;
+  const ox=W/2-10|0,oy=H/2-6|0;for(const[a,b]of p)g[I(ox+a,oy+b)]=1;e.target.value='';draw();};
+document.getElementById('play').onclick=e=>{playing=!playing;e.target.textContent=playing?'⏸ Pause':'▶ Play';};
+document.getElementById('step').onclick=()=>{step();draw();};
+document.getElementById('rand').onclick=rand;
+document.getElementById('clear').onclick=clear;
+rand();loop();
+</script>
+</body>
+</html>

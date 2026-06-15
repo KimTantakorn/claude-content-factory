@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!-- © 2026 VibeBuild (K.T.) — Noncommercial. Commercial use requires a license. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>L-System Plants · VibeBuild</title>
+<style>
+  html,body{margin:0;height:100%;background:#0d1117;color:#c9d1d9;font-family:system-ui,sans-serif;
+       display:flex;flex-direction:column;align-items:center}
+  h1{font-size:18px;margin:12px 0 4px}
+  canvas{border:1px solid #21262d;border-radius:8px;background:#010409}
+  .bar{margin:8px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+  button,select{background:#161b22;color:#c9d1d9;border:1px solid #30363d;border-radius:6px;padding:6px 12px;cursor:pointer}
+  .wm{color:#6e7681;font-size:12px;margin:6px}
+</style>
+</head>
+<body>
+<h1>🌿 L-System Plants</h1>
+<div class="bar">
+  <select id="preset"><option value="0">Fractal tree</option><option value="1">Fern</option><option value="2">Bush</option><option value="3">Dragon</option></select>
+  <button id="grow">Grow +1</button><button id="reset">Reset</button>
+  <span id="info" style="align-self:center;font-size:13px;color:#8b949e"></span>
+</div>
+<canvas id="c" width="700" height="560"></canvas>
+<div class="wm">© VibeBuild (K.T.) · grammar rules → botanical fractals</div>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+const PRE=[
+ {axiom:'F',rules:{F:'FF+[+F-F-F]-[-F+F+F]'},angle:25,len:4,start:Math.PI/2,green:true},
+ {axiom:'X',rules:{X:'F+[[X]-X]-F[-FX]+X',F:'FF'},angle:25,len:5,start:Math.PI/2,green:true},
+ {axiom:'F',rules:{F:'F[+F]F[-F]F'},angle:25,len:6,start:Math.PI/2,green:true},
+ {axiom:'FX',rules:{X:'X+YF+',Y:'-FX-Y'},angle:90,len:8,start:0,green:false}
+];
+let pi=0,gen=0,str='';
+function build(){const p=PRE[pi];str=p.axiom;for(let k=0;k<gen;k++){let n='';for(const ch of str)n+=p.rules[ch]||ch;str=n;}}
+function draw(){
+  const p=PRE[pi];x.fillStyle='#010409';x.fillRect(0,0,c.width,c.height);
+  let X=c.width/2,Y=c.height-10,a=p.start,depth=0;const st=[];
+  const len=Math.max(1.5,p.len*Math.pow(0.55,Math.max(0,gen-4)));
+  x.lineWidth=1.2;
+  for(const ch of str){
+    if(ch==='F'){const nx=X+Math.cos(a)*len,ny=Y-Math.sin(a)*len;
+      x.strokeStyle=p.green?`hsl(${100+depth*12},60%,${35+depth*4}%)`:`hsl(${(depth*30)%360},70%,60%)`;
+      x.beginPath();x.moveTo(X,Y);x.lineTo(nx,ny);x.stroke();X=nx;Y=ny;}
+    else if(ch==='+')a+=p.angle*Math.PI/180;
+    else if(ch==='-')a-=p.angle*Math.PI/180;
+    else if(ch==='['){st.push([X,Y,a,depth]);depth++;}
+    else if(ch===']'){[X,Y,a,depth]=st.pop();}
+  }
+  document.getElementById('info').textContent=`gen ${gen} · ${str.length.toLocaleString()} symbols`;
+}
+function refresh(){build();draw();}
+document.getElementById('grow').onclick=()=>{gen=Math.min(gen+1,pi===1?7:6);refresh();};
+document.getElementById('reset').onclick=()=>{gen=0;refresh();};
+document.getElementById('preset').onchange=e=>{pi=+e.target.value;gen=pi===3?10:4;refresh();};
+gen=4;refresh();
+</script>
+</body>
+</html>

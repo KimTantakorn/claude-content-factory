@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!-- © 2026 VibeBuild (K.T.) — Noncommercial. Commercial use requires a license. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Boids · VibeBuild</title>
+<style>
+  html,body{margin:0;height:100%;background:#0d1117;overflow:hidden;font-family:system-ui,sans-serif}
+  canvas{display:block}
+  .ui{position:fixed;top:12px;left:12px;color:#c9d1d9;font-size:13px;background:#161b22cc;border:1px solid #30363d;border-radius:8px;padding:10px 12px}
+  .ui b{color:#58a6ff} label{display:block;margin-top:6px}
+  input[type=range]{vertical-align:middle}
+  .wm{position:fixed;bottom:10px;right:12px;color:#6e7681;font-size:12px}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="ui"><b>🐦 Boids Flocking</b><br>3 rules → emergent swarm. Move mouse to scatter.
+  <label>Align <input id="al" type="range" min="0" max="2" step="0.05" value="1"></label>
+  <label>Cohere <input id="co" type="range" min="0" max="2" step="0.05" value="1"></label>
+  <label>Separate <input id="se" type="range" min="0" max="3" step="0.05" value="1.4"></label>
+</div>
+<div class="wm">© VibeBuild (K.T.)</div>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+let W,H;function size(){W=c.width=innerWidth;H=c.height=innerHeight;}addEventListener('resize',size);size();
+const N=180,R=60,boids=[];
+for(let i=0;i<N;i++)boids.push({x:Math.random()*W,y:Math.random()*H,vx:Math.random()*2-1,vy:Math.random()*2-1,h:200+Math.random()*60});
+let mouse={x:-999,y:-999};
+addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;});
+addEventListener('mouseout',()=>{mouse.x=mouse.y=-999;});
+const g=id=>+document.getElementById(id).value;
+function step(){
+  const AL=g('al'),CO=g('co'),SE=g('se');
+  for(const b of boids){
+    let ax=0,ay=0,cx=0,cy=0,sx=0,sy=0,n=0;
+    for(const o of boids){ if(o===b)continue; const dx=o.x-b.x,dy=o.y-b.y,d=Math.hypot(dx,dy);
+      if(d<R&&d>0){ ax+=o.vx;ay+=o.vy; cx+=o.x;cy+=o.y; if(d<24){sx-=dx/d;sy-=dy/d;} n++; } }
+    if(n){ ax/=n;ay/=n; cx=cx/n-b.x;cy=cy/n-b.y;
+      b.vx+=(ax*0.05)*AL+(cx*0.0008)*CO+sx*0.08*SE;
+      b.vy+=(ay*0.05)*AL+(cy*0.0008)*CO+sy*0.08*SE; }
+    const mdx=b.x-mouse.x,mdy=b.y-mouse.y,md=Math.hypot(mdx,mdy);
+    if(md<120){b.vx+=mdx/md*0.6;b.vy+=mdy/md*0.6;}
+    const sp=Math.hypot(b.vx,b.vy),max=3.4; if(sp>max){b.vx=b.vx/sp*max;b.vy=b.vy/sp*max;}
+    b.x+=b.vx;b.y+=b.vy;
+    if(b.x<0)b.x+=W;if(b.x>W)b.x-=W;if(b.y<0)b.y+=H;if(b.y>H)b.y-=H;
+  }
+}
+function draw(){
+  x.fillStyle='rgba(13,17,23,0.25)';x.fillRect(0,0,W,H);
+  for(const b of boids){const a=Math.atan2(b.vy,b.vx);
+    x.save();x.translate(b.x,b.y);x.rotate(a);
+    x.fillStyle=`hsl(${b.h},80%,65%)`;
+    x.beginPath();x.moveTo(7,0);x.lineTo(-5,4);x.lineTo(-5,-4);x.closePath();x.fill();x.restore();}
+}
+(function loop(){step();draw();requestAnimationFrame(loop);})();
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!-- © 2026 VibeBuild (K.T.) — Noncommercial. Commercial use requires a license. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>VibeBuild · Project Gallery</title>
+<style>
+  :root{--bg:#0d1117;--card:#161b22;--fg:#c9d1d9;--mut:#8b949e;--acc:#58a6ff;--line:#30363d}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,Segoe UI,Roboto,sans-serif}
+  header{text-align:center;padding:48px 20px 24px}
+  h1{margin:0;font-size:34px;letter-spacing:.5px}
+  .tag{color:var(--acc);font-weight:600}
+  p.sub{color:var(--mut);margin:8px 0 0;font-size:15px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;
+    max-width:1100px;margin:24px auto;padding:0 20px}
+  a.card{display:block;text-decoration:none;color:var(--fg);background:var(--card);border:1px solid var(--line);
+    border-radius:12px;padding:18px;transition:transform .12s,border-color .12s}
+  a.card:hover{transform:translateY(-3px);border-color:var(--acc)}
+  .emoji{font-size:34px}
+  .num{color:var(--mut);font-size:12px;float:right}
+  .name{font-size:17px;font-weight:600;margin:8px 0 4px}
+  .desc{color:var(--mut);font-size:13px;line-height:1.45}
+  footer{text-align:center;color:#6e7681;font-size:13px;padding:30px;border-top:1px solid var(--line);margin-top:24px}
+  footer a{color:var(--acc);text-decoration:none}
+</style>
+</head>
+<body>
+<header>
+  <h1>🎬 <span class="tag">VibeBuild</span> — Project Gallery</h1>
+  <p class="sub">100 projects, zero AI — pure code. Click any to run it live.</p>
+</header>
+<div class="grid" id="grid"></div>
+<footer>
+  © 2026 <b>VibeBuild (K.T.)</b> · Noncommercial license — commercial use requires a paid license.<br>
+  More ideas in <a href="../IDEAS.md">IDEAS.md</a> · <a href="https://github.com/KimTantakorn/claude-content-factory">GitHub</a>
+</footer>
+<script>
+const projects=[
+ ['01-falling-sand','🏖️','Falling Sand','Sand, water, fire & plants interacting in a pixel sim.'],
+ ['11-fractal-explorer','🔭','Fractal Explorer','Infinite-zoom Mandelbrot set. Scroll to dive in.'],
+ ['12-flow-fields','🌀','Flow Fields','Thousands of particles flowing through Perlin noise.'],
+ ['14-boids','🐦','Boids Flocking','Emergent swarms from 3 simple rules.'],
+ ['15-lsystem-plants','🌿','L-System Plants','Grow fractal trees & ferns from grammar rules.'],
+ ['16-harmonograph','🎨','Harmonograph','A simulated pendulum drawing machine.'],
+ ['19-maze','🧩','Maze Gen + Solver','Watch it carve a maze, then BFS-solve it.'],
+ ['22-sorting-visualizer','🔊','Sorting Visualizer','Bars + tones for every compare and swap.'],
+ ['34-typing-test','⌨️','Typing Speed Test','Live WPM and accuracy as you type.'],
+ ['41-life-in-weeks','⏳','Life in Weeks','Your whole life as a grid of dots.'],
+ ['61-solar-system','🪐','Solar System','Eight planets orbiting to (rough) scale.'],
+ ['62-game-of-life','🦠','Game of Life','Cellular automata + classic patterns.'],
+ ['63-double-pendulum','🌀','Double Pendulum','Chaos theory you can watch unfold.'],
+ ['92-matrix-rain','💚','Matrix Rain','The iconic green code rain.'],
+ ['97-typewriter-fx','✨','Typewriter FX','Keystrokes ripple and click.'],
+];
+document.getElementById('grid').innerHTML=projects.map(([f,e,n,d])=>
+ `<a class="card" href="${f}.html"><span class="num">#${f.split('-')[0]}</span>
+  <div class="emoji">${e}</div><div class="name">${n}</div><div class="desc">${d}</div></a>`).join('');
+</script>
+</body>
+</html>

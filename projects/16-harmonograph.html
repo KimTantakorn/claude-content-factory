@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!-- © 2026 VibeBuild (K.T.) — Noncommercial. Commercial use requires a license. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Harmonograph · VibeBuild</title>
+<style>
+  html,body{margin:0;height:100%;background:#0d1117;overflow:hidden;font-family:system-ui,sans-serif;color:#c9d1d9}
+  canvas{display:block;margin:auto}
+  .ui{position:fixed;top:12px;left:12px;font-size:13px;background:#161b22cc;border:1px solid #30363d;border-radius:8px;padding:10px 12px}
+  .ui b{color:#58a6ff}
+  button{background:#21262d;color:#c9d1d9;border:1px solid #30363d;border-radius:6px;padding:6px 12px;cursor:pointer;margin-top:6px}
+  .wm{position:fixed;bottom:10px;right:12px;color:#6e7681;font-size:12px}
+</style>
+</head>
+<body>
+<canvas id="c" width="700" height="700"></canvas>
+<div class="ui"><b>🎨 Harmonograph</b><br>A simulated pendulum drawing machine.<br><button id="r">New drawing</button></div>
+<div class="wm">© VibeBuild (K.T.)</div>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+function fit(){const s=Math.min(innerWidth,innerHeight)-30;c.style.width=c.style.height=s+'px';}
+addEventListener('resize',fit);fit();
+const cx=c.width/2,cy=c.height/2,A=c.width*0.32;
+let P,t,hue,running;
+const rnd=(a,b)=>a+Math.random()*(b-a);
+function reset(){
+  x.fillStyle='#0d1117';x.fillRect(0,0,c.width,c.height);
+  hue=rnd(0,360);
+  // two x-pendulums, two y-pendulums, each with freq/phase/decay
+  P={ f1:rnd(2,3),f2:rnd(2,3),f3:rnd(2,3),f4:rnd(2,3),
+      p1:rnd(0,6.28),p2:rnd(0,6.28),p3:rnd(0,6.28),p4:rnd(0,6.28),
+      d:rnd(0.0015,0.004) };
+  t=0;running=true;
+}
+document.getElementById('r').onclick=reset;reset();
+function frame(){
+  if(running){
+    x.lineWidth=1;
+    for(let i=0;i<450;i++){
+      const e=Math.exp(-P.d*t);
+      const px=cx+A*e*(Math.sin(t*P.f1+P.p1)+Math.sin(t*P.f2+P.p2))/2;
+      const py=cy+A*e*(Math.sin(t*P.f3+P.p3)+Math.sin(t*P.f4+P.p4))/2;
+      if(t>0){x.strokeStyle=`hsla(${(hue+t*4)%360},75%,62%,0.7)`;x.beginPath();x.moveTo(lx,ly);x.lineTo(px,py);x.stroke();}
+      lx=px;ly=py;t+=0.012;
+      if(Math.exp(-P.d*t)<0.02){running=false;break;}
+    }
+  }
+  requestAnimationFrame(frame);
+}
+let lx=cx,ly=cy;frame();
+</script>
+</body>
+</html>

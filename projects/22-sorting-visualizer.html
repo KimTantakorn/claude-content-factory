@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- © 2026 VibeBuild (K.T.) — Noncommercial. Commercial use requires a license. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sorting Visualizer (with sound) · VibeBuild</title>
+<style>
+  html,body{margin:0;height:100%;background:#0d1117;color:#c9d1d9;font-family:system-ui,sans-serif;
+       display:flex;flex-direction:column;align-items:center}
+  h1{font-size:18px;margin:14px 0 6px}
+  canvas{border:1px solid #21262d;border-radius:8px;background:#010409}
+  .bar{margin:10px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+  button,select{background:#161b22;color:#c9d1d9;border:1px solid #30363d;border-radius:6px;padding:6px 12px;cursor:pointer}
+  .wm{color:#6e7681;font-size:12px;margin:8px}
+</style>
+</head>
+<body>
+<h1>🔊 Sorting Visualizer — with sound</h1>
+<div class="bar">
+  <select id="algo">
+    <option value="bubble">Bubble</option><option value="insertion">Insertion</option>
+    <option value="selection">Selection</option><option value="quick">Quick</option><option value="merge">Merge</option>
+  </select>
+  <button id="shuffle">Shuffle</button><button id="go">Sort</button>
+  <label style="align-self:center;font-size:13px">Size <input id="n" type="range" min="20" max="200" value="80"></label>
+</div>
+<canvas id="c" width="800" height="380"></canvas>
+<div class="wm">© VibeBuild (K.T.) · each comparison/swap plays a tone</div>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+let A=[],n=80,running=false,active=-1,active2=-1;
+let actx;function beep(v){ if(!actx)actx=new(window.AudioContext||webkitAudioContext)();
+  const o=actx.createOscillator(),g=actx.createGain();o.frequency.value=200+v*700;o.type='sine';
+  g.gain.value=0.04;o.connect(g);g.connect(actx.destination);o.start();
+  g.gain.exponentialRampToValueAtTime(0.0001,actx.currentTime+0.05);o.stop(actx.currentTime+0.05);}
+function shuffle(){n=+document.getElementById('n').value;A=Array.from({length:n},(_,i)=>(i+1)/n);
+  for(let i=n-1;i>0;i--){const j=Math.random()*(i+1)|0;[A[i],A[j]]=[A[j],A[i]];}active=active2=-1;draw();}
+function draw(){x.fillStyle='#010409';x.fillRect(0,0,c.width,c.height);const w=c.width/n;
+  for(let i=0;i<n;i++){const h=A[i]*(c.height-10);
+    x.fillStyle=(i===active||i===active2)?'#f78166':`hsl(${A[i]*200+150},70%,60%)`;
+    x.fillRect(i*w,c.height-h,Math.max(1,w-1),h);}}
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+async function mark(i,j,v){active=i;active2=j;beep(v??A[i]);draw();await sleep(2000/n);}
+async function bubble(){for(let i=0;i<n;i++)for(let j=0;j<n-i-1;j++){await mark(j,j+1);if(A[j]>A[j+1]){[A[j],A[j+1]]=[A[j+1],A[j]];}}}
+async function insertion(){for(let i=1;i<n;i++){let k=A[i],j=i-1;while(j>=0&&A[j]>k){A[j+1]=A[j];await mark(j,j+1);j--;}A[j+1]=k;}}
+async function selection(){for(let i=0;i<n;i++){let m=i;for(let j=i+1;j<n;j++){await mark(m,j);if(A[j]<A[m])m=j;}[A[i],A[m]]=[A[m],A[i]];}}
+async function quick(lo=0,hi=n-1){if(lo>=hi)return;let p=A[hi],i=lo;for(let j=lo;j<hi;j++){await mark(j,hi);if(A[j]<p){[A[i],A[j]]=[A[j],A[i]];i++;}}[A[i],A[hi]]=[A[hi],A[i]];await quick(lo,i-1);await quick(i+1,hi);}
+async function merge(lo=0,hi=n-1){if(lo>=hi)return;const mid=(lo+hi)>>1;await merge(lo,mid);await merge(mid+1,hi);
+  const t=[];let i=lo,j=mid+1;while(i<=mid&&j<=hi){await mark(i,j);t.push(A[i]<=A[j]?A[i++]:A[j++]);}
+  while(i<=mid)t.push(A[i++]);while(j<=hi)t.push(A[j++]);for(let k=0;k<t.length;k++){A[lo+k]=t[k];await mark(lo+k,-1);}}
+const algos={bubble,insertion,selection,quick,merge};
+document.getElementById('shuffle').onclick=shuffle;
+document.getElementById('n').oninput=shuffle;
+document.getElementById('go').onclick=async()=>{if(running)return;running=true;await algos[document.getElementById('algo').value]();
+  // victory sweep
+  for(let i=0;i<n;i++){active=i;active2=-1;beep(A[i]);draw();await sleep(800/n);}active=active2=-1;draw();running=false;};
+shuffle();
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!-- © 2026 VibeBuild (K.T.) — Noncommercial. Commercial use requires a license. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Maze Generator + Solver · VibeBuild</title>
+<style>
+  html,body{margin:0;height:100%;background:#0d1117;color:#c9d1d9;font-family:system-ui,sans-serif;
+       display:flex;flex-direction:column;align-items:center}
+  h1{font-size:18px;margin:14px 0 6px}
+  canvas{border:1px solid #21262d;border-radius:8px;background:#010409}
+  .bar{margin:10px;display:flex;gap:8px}
+  button{background:#161b22;color:#c9d1d9;border:1px solid #30363d;border-radius:6px;padding:6px 14px;cursor:pointer}
+  .wm{color:#6e7681;font-size:12px;margin:8px}
+</style>
+</head>
+<body>
+<h1>🧩 Maze Generator + Solver</h1>
+<div class="bar"><button id="gen">Generate</button><button id="solve">Solve (BFS)</button></div>
+<canvas id="c" width="600" height="600"></canvas>
+<div class="wm">© VibeBuild (K.T.) · watch it carve, then flood-fill solve</div>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+const COLS=30,ROWS=30,CELL=c.width/COLS;
+let grid,stack,cur,mode,solveQ,visited,prev,busy=false;
+function makeGrid(){grid=[];for(let j=0;j<ROWS;j++)for(let i=0;i<COLS;i++)grid.push({i,j,walls:[1,1,1,1],vis:false});}
+const at=(i,j)=>(i<0||j<0||i>=COLS||j>=ROWS)?undefined:grid[i+j*COLS];
+function neighbors(c){return [at(c.i,c.j-1),at(c.i+1,c.j),at(c.i,c.j+1),at(c.i-1,c.j)].map((n,d)=>({n,d})).filter(o=>o.n&&!o.n.vis);}
+function removeWall(a,b){const dx=a.i-b.i,dy=a.j-b.j;
+  if(dx===1){a.walls[3]=0;b.walls[1]=0;}else if(dx===-1){a.walls[1]=0;b.walls[3]=0;}
+  if(dy===1){a.walls[0]=0;b.walls[2]=0;}else if(dy===-1){a.walls[2]=0;b.walls[0]=0;}}
+function draw(){
+  x.fillStyle='#010409';x.fillRect(0,0,c.width,c.height);
+  for(const cell of grid){const px=cell.i*CELL,py=cell.j*CELL;
+    if(cell.vis){x.fillStyle='#0d1117';x.fillRect(px,py,CELL,CELL);}
+    x.strokeStyle='#58a6ff';x.lineWidth=2;x.beginPath();
+    if(cell.walls[0]){x.moveTo(px,py);x.lineTo(px+CELL,py);}
+    if(cell.walls[1]){x.moveTo(px+CELL,py);x.lineTo(px+CELL,py+CELL);}
+    if(cell.walls[2]){x.moveTo(px+CELL,py+CELL);x.lineTo(px,py+CELL);}
+    if(cell.walls[3]){x.moveTo(px,py+CELL);x.lineTo(px,py);}
+    x.stroke();}
+  if(visited)for(const k in visited){const[i,j]=k.split(',').map(Number);
+    x.fillStyle='rgba(63,185,80,0.35)';x.fillRect(i*CELL+CELL*0.25,j*CELL+CELL*0.25,CELL*0.5,CELL*0.5);}
+  if(mode==='gen'&&cur){x.fillStyle='#f78166';x.fillRect(cur.i*CELL+2,cur.j*CELL+2,CELL-4,CELL-4);}
+}
+function genStep(){ cur.vis=true; const ns=neighbors(cur);
+  if(ns.length){const{n}=ns[Math.random()*ns.length|0];stack.push(cur);removeWall(cur,n);cur=n;}
+  else if(stack.length){cur=stack.pop();} else {busy=false;cur=null;}
+}
+function solveStep(){
+  if(!solveQ.length){busy=false;return;}
+  const cell=solveQ.shift();const key=cell.i+','+cell.j;
+  if(cell.i===COLS-1&&cell.j===ROWS-1){ // backtrack path
+    let p=cell;visited={};while(p){visited[p.i+','+p.j]=1;p=prev[p.i+','+p.j];}busy=false;return;}
+  const dirs=[[0,-1,0],[1,0,1],[0,1,2],[-1,0,3]];
+  for(const[di,dj,w]of dirs){ if(cell.walls[w])continue; const n=at(cell.i+di,cell.j+dj);
+    if(n&&!seen[n.i+','+n.j]){seen[n.i+','+n.j]=1;prev[n.i+','+n.j]=cell;solveQ.push(n);} }
+  visited[key]=1;
+}
+let seen;
+function loop(){ if(busy){ if(mode==='gen'){for(let k=0;k<2;k++)if(busy)genStep();} else {for(let k=0;k<4;k++)if(busy)solveStep();} } draw(); requestAnimationFrame(loop);}
+document.getElementById('gen').onclick=()=>{makeGrid();stack=[];cur=grid[0];mode='gen';visited=null;busy=true;};
+document.getElementById('solve').onclick=()=>{ if(!grid)return; mode='solve';solveQ=[grid[0]];seen={'0,0':1};prev={};visited={};busy=true;};
+makeGrid();stack=[];cur=grid[0];mode='gen';busy=true;loop();
+</script>
+</body>
+</html>

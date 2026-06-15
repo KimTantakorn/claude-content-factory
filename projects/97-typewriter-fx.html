@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!-- © 2026 VibeBuild (K.T.) — Noncommercial. Commercial use requires a license. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Typewriter FX · VibeBuild</title>
+<style>
+  html,body{margin:0;height:100%;background:#0d1117;overflow:hidden;font-family:ui-monospace,monospace}
+  canvas{position:fixed;inset:0}
+  #ta{position:fixed;inset:0;background:transparent;color:#c9d1d9;border:0;outline:0;resize:none;
+    font:24px ui-monospace,monospace;padding:8vh 8vw;line-height:1.6;caret-color:#58a6ff}
+  .hint{position:fixed;bottom:10px;left:12px;color:#6e7681;font-size:12px}
+  .wm{position:fixed;bottom:10px;right:12px;color:#6e7681;font-size:12px}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<textarea id="ta" placeholder="start typing… every keystroke ripples + clicks" autofocus></textarea>
+<div class="hint">just type — sound + ripples on every key</div>
+<div class="wm">© VibeBuild (K.T.)</div>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d'),ta=document.getElementById('ta');
+let W,H;function size(){W=c.width=innerWidth;H=c.height=innerHeight;}addEventListener('resize',size);size();
+let ripples=[];
+let actx;function click(f){if(!actx)actx=new(window.AudioContext||webkitAudioContext)();
+  const o=actx.createOscillator(),g=actx.createGain();o.type='square';o.frequency.value=f;
+  g.gain.value=0.05;o.connect(g);g.connect(actx.destination);o.start();
+  g.gain.exponentialRampToValueAtTime(0.0001,actx.currentTime+0.06);o.stop(actx.currentTime+0.07);}
+function caretXY(){
+  // approximate caret position from textarea metrics
+  const before=ta.value.substring(0,ta.selectionStart);
+  const lines=before.split('\n');const row=lines.length-1;const col=lines[lines.length-1].length;
+  const padX=innerWidth*0.08, padY=innerHeight*0.08+12;
+  return [padX+col*14.4, padY+row*38.4];
+}
+ta.addEventListener('keydown',e=>{
+  const[cxp,cyp]=caretXY();
+  ripples.push({x:cxp,y:cyp,r:0,h:Math.random()*360});
+  click(e.key===' '?160 : 280+Math.random()*240);
+});
+function frame(){
+  x.fillStyle='rgba(13,17,23,0.18)';x.fillRect(0,0,W,H);
+  ripples=ripples.filter(p=>p.r<120);
+  for(const p of ripples){p.r+=3;
+    x.strokeStyle=`hsla(${p.h},80%,65%,${1-p.r/120})`;x.lineWidth=2;
+    x.beginPath();x.arc(p.x,p.y,p.r,0,7);x.stroke();}
+  requestAnimationFrame(frame);
+}
+frame();
+</script>
+</body>
+</html>

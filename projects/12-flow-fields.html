@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!-- © 2026 VibeBuild (K.T.) — Noncommercial. Commercial use requires a license. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Flow Fields · VibeBuild</title>
+<style>
+  html,body{margin:0;height:100%;background:#0d1117;overflow:hidden;font-family:system-ui,sans-serif}
+  canvas{display:block}
+  .ui{position:fixed;top:12px;left:12px;color:#c9d1d9;font-size:13px;background:#161b22cc;
+      border:1px solid #30363d;border-radius:8px;padding:10px 12px}
+  .ui b{color:#58a6ff}
+  button{background:#21262d;color:#c9d1d9;border:1px solid #30363d;border-radius:6px;padding:5px 10px;cursor:pointer;margin-top:6px}
+  .wm{position:fixed;bottom:10px;right:12px;color:#6e7681;font-size:12px}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="ui"><b>🌀 Flow Fields</b><br>Perlin-noise particle flow<br><button id="r">New field + clear</button></div>
+<div class="wm">© VibeBuild (K.T.)</div>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+let W,H; function size(){W=c.width=innerWidth;H=c.height=innerHeight;x.fillStyle='#0d1117';x.fillRect(0,0,W,H);}
+addEventListener('resize',size);size();
+// --- tiny value-noise (gradient-ish) ---
+const perm=new Uint8Array(512);(()=>{const p=[...Array(256).keys()];for(let i=255;i>0;i--){const j=Math.random()*(i+1)|0;[p[i],p[j]]=[p[j],p[i]];}for(let i=0;i<512;i++)perm[i]=p[i&255];})();
+const fade=t=>t*t*t*(t*(t*6-15)+10);
+const lerp=(a,b,t)=>a+(b-a)*t;
+function grad(h,x,y){const u=h&1?x:-x,v=h&2?y:-y;return u+v;}
+function noise(px,py){const X=Math.floor(px)&255,Y=Math.floor(py)&255;px-=Math.floor(px);py-=Math.floor(py);
+  const u=fade(px),v=fade(py);const A=perm[X]+Y,B=perm[X+1]+Y;
+  return lerp(lerp(grad(perm[A],px,py),grad(perm[B],px-1,py),u),
+             lerp(grad(perm[A+1],px,py-1),grad(perm[B+1],px-1,py-1),u),v);}
+let t=0, N=1400, P=[], hue=Math.random()*360;
+function reset(){x.fillStyle='#0d1117';x.fillRect(0,0,W,H);hue=Math.random()*360;
+  P=Array.from({length:N},()=>({x:Math.random()*W,y:Math.random()*H,h:hue+Math.random()*60-30}));}
+document.getElementById('r').onclick=reset;reset();
+function frame(){
+  x.fillStyle='rgba(13,17,23,0.012)';x.fillRect(0,0,W,H); // slow fade
+  for(const p of P){
+    const a=noise(p.x*0.0016,p.y*0.0016+t)*Math.PI*3;
+    p.px=p.x;p.py=p.y; p.x+=Math.cos(a)*1.6; p.y+=Math.sin(a)*1.6;
+    if(p.x<0||p.x>W||p.y<0||p.y>H){p.x=Math.random()*W;p.y=Math.random()*H;p.px=p.x;p.py=p.y;}
+    x.strokeStyle=`hsla(${p.h},80%,62%,0.5)`;x.lineWidth=1;
+    x.beginPath();x.moveTo(p.px,p.py);x.lineTo(p.x,p.y);x.stroke();
+  }
+  t+=0.0009;requestAnimationFrame(frame);
+}
+frame();
+</script>
+</body>
+</html>

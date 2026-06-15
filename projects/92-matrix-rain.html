@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!-- © 2026 VibeBuild (K.T.) — Noncommercial. Commercial use requires a license. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Matrix Rain · VibeBuild</title>
+<style>
+  html,body{margin:0;height:100%;background:#000;overflow:hidden;font-family:system-ui,sans-serif}
+  canvas{display:block}
+  .wm{position:fixed;bottom:8px;right:12px;color:#0a4;font-size:12px;font-family:monospace}
+  .hint{position:fixed;top:10px;left:12px;color:#0a4;font-size:12px;font-family:monospace}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="hint">press any key to change color</div>
+<div class="wm">© VibeBuild (K.T.)</div>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+let W,H,cols,drops,fs=16;
+const chars='アァカサタナハマヤラワabcdefghijklmnopqrstuvwxyz0123456789@#$%';
+function size(){W=c.width=innerWidth;H=c.height=innerHeight;cols=Math.ceil(W/fs);
+  drops=Array.from({length:cols},()=>Math.random()*-H/fs);}
+addEventListener('resize',size);size();
+let hue=130;
+addEventListener('keydown',()=>hue=(hue+47)%360);
+function frame(){
+  x.fillStyle='rgba(0,0,0,0.06)';x.fillRect(0,0,W,H);
+  x.font=fs+'px monospace';
+  for(let i=0;i<cols;i++){
+    const ch=chars[Math.random()*chars.length|0];const px=i*fs,py=drops[i]*fs;
+    x.fillStyle=`hsl(${hue},100%,75%)`;x.fillText(ch,px,py);                 // bright head
+    x.fillStyle=`hsl(${hue},100%,45%)`;x.fillText(chars[Math.random()*chars.length|0],px,py-fs);
+    if(py>H&&Math.random()>0.975)drops[i]=0; else drops[i]+=0.5;
+  }
+  requestAnimationFrame(frame);
+}
+frame();
+</script>
+</body>
+</html>
