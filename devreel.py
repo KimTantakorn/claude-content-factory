@@ -4,7 +4,7 @@
 #  © 2026 VibeBuild (K.T.). All rights reserved.
 #  Licensed under PolyForm Noncommercial 1.0.0 — see LICENSE.md.
 #  Commercial use (apps, products, business) requires a paid license:
-#  see COMMERCIAL.md or email kimtantakorn@gmail.com.
+#  see COMMERCIAL.md or email complexwalk@gmail.com.
 # =============================================================================
 """
 DevReel - turn a coding session into shareable content.

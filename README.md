@@ -81,7 +81,7 @@ python devreel.py reel --input builds/session.mp4 --out builds/reel.mp4
 [PolyForm Noncommercial License 1.0.0](LICENSE.md).
 
 - ✅ **Free** for personal, educational, and nonprofit use.
-- 💼 **Commercial use** (apps, products, business, revenue) **requires a paid license** — see [COMMERCIAL.md](COMMERCIAL.md) or email kimtantakorn@gmail.com.
+- 💼 **Commercial use** (apps, products, business, revenue) **requires a paid license** — see [COMMERCIAL.md](COMMERCIAL.md) or email complexwalk@gmail.com.
 
 All generated videos and recaps are watermarked `© VibeBuild (K.T.)`.
 

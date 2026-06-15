@@ -137,4 +137,4 @@ This project is **free for personal, educational, and other noncommercial use**.
 it, or using it to generate revenue — requires a paid commercial license.**
 
 See [COMMERCIAL.md](COMMERCIAL.md) and contact **VibeBuild (K.T.)**
-(kimtantakorn@gmail.com) to obtain one.
+(complexwalk@gmail.com) to obtain one.

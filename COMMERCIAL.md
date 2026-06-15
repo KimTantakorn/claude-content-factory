@@ -22,7 +22,7 @@ You must purchase a commercial license from **VibeBuild (K.T.)** if you:
 ## 📩 Get a commercial license
 Contact the author to discuss terms and pricing:
 - **Name:** VibeBuild (K.T.)
-- **Email:** kimtantakorn@gmail.com
+- **Email:** complexwalk@gmail.com
 - **GitHub:** https://github.com/KimTantakorn
 
 Licensing is flexible — solo devs, startups, and enterprises get different terms.
