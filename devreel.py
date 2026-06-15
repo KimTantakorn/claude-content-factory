@@ -22,6 +22,13 @@ import sys
 import tempfile
 from pathlib import Path
 
+# Windows consoles default to cp1252 and choke on emoji; force UTF-8 output.
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8")  # type: ignore[attr-defined]
+    except Exception:
+        pass
+
 # ----------------------------------------------------------------------------- helpers
 
 # Common winget install location is not on PATH until shell restart, so probe it.
